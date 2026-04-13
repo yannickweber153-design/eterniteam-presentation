@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/presentation/eterniteam-latest-1.html" }
+  ]
+}
