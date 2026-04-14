@@ -127,6 +127,12 @@ body::before{
 .ptab{padding:8px 18px;border-radius:50px;font-size:13px;font-weight:600;cursor:pointer;
   border:1.5px solid var(--border);background:#fff;color:var(--gray);transition:all .25s ease}
 .ptab.on{background:var(--navy);color:#fff;border-color:var(--navy);box-shadow:0 4px 14px rgba(27,58,92,.25)}
+/* ─── A6 STAGE TABS ─── */
+.a6-stab{display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 16px;border-radius:12px;border:1.5px solid rgba(27,58,92,.12);background:#fff;cursor:pointer;transition:all .25s;color:var(--navy)}
+.a6-stab-yr{font-size:11px;font-weight:700;letter-spacing:-.01em;font-family:-apple-system,sans-serif}
+.a6-stab-sub{font-size:9.5px;font-weight:400;color:#8B919A;font-family:-apple-system,sans-serif;letter-spacing:.03em}
+.a6-stab-on,.a6-stab:hover{background:var(--navy);border-color:var(--navy);box-shadow:0 4px 16px rgba(27,58,92,.22)}
+.a6-stab-on .a6-stab-yr,.a6-stab-on .a6-stab-sub,.a6-stab:hover .a6-stab-yr,.a6-stab:hover .a6-stab-sub{color:#fff}
 
 /* ─── AVATAR ─── */
 .avatar{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;
@@ -981,126 +987,164 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
 ═══════════════════════════════════════════════ -->
 <div class="slide" id="s6">
   <div class="grid-bg absolute inset-0"></div>
-  <div class="slide-inner" style="padding:44px 72px 28px;display:flex;flex-direction:column">
+  <div class="slide-inner" style="padding:36px 72px 80px;display:flex;flex-direction:column">
 
-    <!-- Header -->
-    <div class="afu" style="margin-bottom:22px">
-      <div class="label" style="margin-bottom:10px">Beteiligungsmodell</div>
-      <h2 class="h2">Durch Anteilsrückkäufe wird das Team<br>sukzessive zur <span class="grad-text">Mehrheit.</span></h2>
-    </div>
-
-    <!-- Main: Donut + Info -->
-    <div class="afu d2" style="flex:1;display:flex;gap:60px;align-items:center;min-height:0">
-
-      <!-- Donut -->
-      <div style="flex-shrink:0;position:relative;width:280px;height:280px">
-        <svg width="280" height="280" viewBox="0 0 280 280" style="transform:rotate(-90deg);display:block">
-          <circle cx="140" cy="140" r="104" fill="none" stroke="#E8EAE6" stroke-width="34"/>
-          <!-- TM (gold) -->
-          <circle id="a6-tm" cx="140" cy="140" r="104" fill="none" stroke="#C9A84C" stroke-width="34"
-            stroke-dasharray="0 653.5" stroke-dashoffset="0"
-            style="transition:stroke-dasharray .95s cubic-bezier(.4,0,.2,1),stroke-dashoffset .95s cubic-bezier(.4,0,.2,1);filter:drop-shadow(0 0 6px rgba(201,168,76,.25))"/>
-          <!-- GF (blue) -->
-          <circle id="a6-gf" cx="140" cy="140" r="104" fill="none" stroke="#4A8DB8" stroke-width="34"
-            stroke-dasharray="0 653.5" stroke-dashoffset="0"
-            style="transition:stroke-dasharray .95s cubic-bezier(.4,0,.2,1),stroke-dashoffset .95s cubic-bezier(.4,0,.2,1);filter:drop-shadow(0 0 6px rgba(74,141,184,.25))"/>
-          <!-- ET (navy) -->
-          <circle id="a6-et" cx="140" cy="140" r="104" fill="none" stroke="#1B3A5C" stroke-width="34"
-            stroke-dasharray="653.5 653.5" stroke-dashoffset="0"
-            style="transition:stroke-dasharray .95s cubic-bezier(.4,0,.2,1),stroke-dashoffset .95s cubic-bezier(.4,0,.2,1)"/>
-        </svg>
-        <!-- Center -->
-        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
-          <div id="a6-cpct" style="font-size:42px;font-weight:900;color:#1B3A5C;letter-spacing:-2px;line-height:1;font-family:-apple-system,sans-serif;transition:all .4s">100%</div>
-          <div style="font-size:10px;font-weight:700;color:#8B919A;letter-spacing:.1em;text-transform:uppercase;margin-top:3px;font-family:-apple-system,sans-serif">EterniTeam</div>
-          <div id="a6-cpcts2" style="display:flex;gap:8px;margin-top:7px;opacity:0;transition:opacity .6s .3s">
-            <span id="a6-cgf" style="font-size:12px;font-weight:700;color:#4A8DB8;font-family:-apple-system,sans-serif">0%</span>
-            <span style="font-size:11px;color:#CDD">·</span>
-            <span id="a6-ctm" style="font-size:12px;font-weight:700;color:#C9A84C;font-family:-apple-system,sans-serif">0%</span>
-          </div>
-        </div>
-        <!-- Glow ring on active -->
-        <div style="position:absolute;inset:-8px;border-radius:50%;border:1px solid rgba(27,58,92,.06);pointer-events:none"></div>
+    <!-- Header row: label + h2 + timeline tabs on right -->
+    <div class="afu" style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:20px;gap:20px">
+      <div>
+        <div class="label" style="margin-bottom:8px">Beteiligungsmodell</div>
+        <h2 class="h2" style="margin:0">Durch Anteilsrückkäufe wird das Team<br>sukzessive zur <span class="grad-text">Mehrheit.</span></h2>
       </div>
-
-      <!-- Right info panel -->
-      <div style="flex:1;min-width:0">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:11px">
-          <div id="a6-badge" style="padding:4px 14px;border-radius:50px;background:#1B3A5C;color:#fff;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-family:-apple-system,sans-serif;transition:background .6s">Jahr 0 · Kauf</div>
-          <div id="a6-sublabel" style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#7A9E7E;font-family:-apple-system,sans-serif;transition:opacity .4s">Transaktion</div>
-        </div>
-        <div id="a6-title" style="font-size:24px;font-weight:800;color:#1B3A5C;letter-spacing:-.5px;line-height:1.18;margin-bottom:9px;font-family:-apple-system,sans-serif;transition:opacity .35s,transform .35s">100% Eigentum<br>bei EterniTeam</div>
-        <div id="a6-desc" style="font-size:13.5px;color:#8B919A;line-height:1.7;margin-bottom:22px;max-width:380px;font-family:-apple-system,sans-serif;transition:opacity .35s,transform .35s">EterniTeam erwirbt <strong style="color:#1B3A5C">100%</strong> der Anteile. Sofortige Transaktionssicherheit für den Verkäufer.</div>
-
-        <!-- Bar rows -->
-        <div style="display:flex;flex-direction:column;gap:9px;max-width:400px">
-          <div style="display:flex;align-items:center;gap:10px">
-            <div style="width:9px;height:9px;border-radius:2px;background:#1B3A5C;flex-shrink:0"></div>
-            <div style="width:110px;font-size:12px;font-weight:600;color:#1B3A5C;font-family:-apple-system,sans-serif;white-space:nowrap">EterniTeam</div>
-            <div style="flex:1;height:5px;background:#E8EAE6;border-radius:3px;overflow:hidden">
-              <div id="a6-bar-et" style="height:100%;width:100%;background:linear-gradient(90deg,#1B3A5C,#2E5A8C);border-radius:3px;transition:width .95s cubic-bezier(.4,0,.2,1)"></div>
-            </div>
-            <div id="a6-lbl-et" style="width:36px;text-align:right;font-size:13px;font-weight:700;color:#1B3A5C;font-family:-apple-system,sans-serif">100%</div>
-          </div>
-          <div style="display:flex;align-items:center;gap:10px">
-            <div style="width:9px;height:9px;border-radius:2px;background:#4A8DB8;flex-shrink:0"></div>
-            <div style="width:110px;font-size:12px;font-weight:600;color:#4A8DB8;font-family:-apple-system,sans-serif;white-space:nowrap">Geschäftsführung</div>
-            <div style="flex:1;height:5px;background:#E8EAE6;border-radius:3px;overflow:hidden">
-              <div id="a6-bar-gf" style="height:100%;width:0%;background:linear-gradient(90deg,#4A8DB8,#5AADDE);border-radius:3px;transition:width .95s cubic-bezier(.4,0,.2,1)"></div>
-            </div>
-            <div id="a6-lbl-gf" style="width:36px;text-align:right;font-size:13px;font-weight:700;color:#4A8DB8;font-family:-apple-system,sans-serif">0%</div>
-          </div>
-          <div style="display:flex;align-items:center;gap:10px">
-            <div style="width:9px;height:9px;border-radius:2px;background:#C9A84C;flex-shrink:0"></div>
-            <div style="width:110px;font-size:12px;font-weight:600;color:#C9A84C;font-family:-apple-system,sans-serif;white-space:nowrap">Team (MA)</div>
-            <div style="flex:1;height:5px;background:#E8EAE6;border-radius:3px;overflow:hidden">
-              <div id="a6-bar-tm" style="height:100%;width:0%;background:linear-gradient(90deg,#C9A84C,#E8C46A);border-radius:3px;transition:width .95s cubic-bezier(.4,0,.2,1)"></div>
-            </div>
-            <div id="a6-lbl-tm" style="width:36px;text-align:right;font-size:13px;font-weight:700;color:#C9A84C;font-family:-apple-system,sans-serif">0%</div>
-          </div>
-        </div>
+      <!-- Stage tabs top-right -->
+      <div style="display:flex;gap:6px;flex-shrink:0;padding-bottom:4px">
+        <button id="a6t0" onclick="antGoTo(0)" class="a6-stab a6-stab-on">
+          <span class="a6-stab-yr">Jahr 0</span><span class="a6-stab-sub">Kauf</span>
+        </button>
+        <button id="a6t1" onclick="antGoTo(1)" class="a6-stab">
+          <span class="a6-stab-yr">Jahr 0</span><span class="a6-stab-sub">Sofort</span>
+        </button>
+        <button id="a6t2" onclick="antGoTo(2)" class="a6-stab">
+          <span class="a6-stab-yr">Jahr 5</span><span class="a6-stab-sub">Wachstum</span>
+        </button>
+        <button id="a6t3" onclick="antGoTo(3)" class="a6-stab">
+          <span class="a6-stab-yr">Jahr 15+</span><span class="a6-stab-sub">Mehrheit</span>
+        </button>
       </div>
     </div>
 
-    <!-- Timeline -->
-    <div class="afu d3" style="display:flex;justify-content:center;gap:40px;padding-top:18px;border-top:1px solid rgba(27,58,92,.07);margin-top:4px">
-      <!-- mini-donut 0: 100/0/0 -->
-      <div class="a6-tl" id="a6t0" onclick="antGoTo(0)" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;opacity:.45;transition:opacity .35s,transform .35s">
-        <svg width="48" height="48" viewBox="0 0 48 48" style="transform:rotate(-90deg)" class="a6-mini-svg">
-          <circle cx="24" cy="24" r="18" fill="none" stroke="#E8EAE6" stroke-width="6"/>
-          <circle cx="24" cy="24" r="18" fill="none" stroke="#1B3A5C" stroke-width="6" stroke-dasharray="113.1 113.1"/>
-        </svg>
-        <div style="font-size:10px;font-weight:700;color:#1B3A5C;letter-spacing:.06em;font-family:-apple-system,sans-serif;text-align:center;line-height:1.3">Jahr 0<br><span style="font-weight:400;color:#8B919A;font-size:9px">Kauf</span></div>
+    <!-- Main card -->
+    <div class="afu d2 card" style="flex:1;display:flex;gap:0;overflow:hidden;padding:0;min-height:0">
+
+      <!-- LEFT: Donut panel -->
+      <div style="width:340px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:36px 28px;background:rgba(27,58,92,.03);border-right:1px solid rgba(27,58,92,.07);position:relative;overflow:hidden">
+        <!-- Ambient glow -->
+        <div id="a6-glow" style="position:absolute;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(27,58,92,.08) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;transition:background 1s"></div>
+
+        <!-- Big donut -->
+        <div style="position:relative;width:240px;height:240px;flex-shrink:0">
+          <svg width="240" height="240" viewBox="0 0 240 240" style="transform:rotate(-90deg);display:block;filter:drop-shadow(0 8px 32px rgba(27,58,92,.12))">
+            <circle cx="120" cy="120" r="90" fill="none" stroke="#E8EAE6" stroke-width="30"/>
+            <circle id="a6-tm" cx="120" cy="120" r="90" fill="none" stroke="#C9A84C" stroke-width="30"
+              stroke-dasharray="0 565.5" stroke-dashoffset="0"
+              style="transition:stroke-dasharray .9s cubic-bezier(.4,0,.2,1),stroke-dashoffset .9s cubic-bezier(.4,0,.2,1)"/>
+            <circle id="a6-gf" cx="120" cy="120" r="90" fill="none" stroke="#4A8DB8" stroke-width="30"
+              stroke-dasharray="0 565.5" stroke-dashoffset="0"
+              style="transition:stroke-dasharray .9s cubic-bezier(.4,0,.2,1),stroke-dashoffset .9s cubic-bezier(.4,0,.2,1)"/>
+            <circle id="a6-et" cx="120" cy="120" r="90" fill="none" stroke="#1B3A5C" stroke-width="30"
+              stroke-dasharray="565.5 565.5" stroke-dashoffset="0"
+              style="transition:stroke-dasharray .9s cubic-bezier(.4,0,.2,1),stroke-dashoffset .9s cubic-bezier(.4,0,.2,1)"/>
+          </svg>
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px">
+            <div id="a6-cpct" style="font-size:46px;font-weight:900;color:#1B3A5C;letter-spacing:-3px;line-height:1;font-family:-apple-system,sans-serif">100%</div>
+            <div style="font-size:9px;font-weight:700;color:#8B919A;letter-spacing:.12em;text-transform:uppercase;font-family:-apple-system,sans-serif">EterniTeam</div>
+            <div id="a6-cpcts2" style="display:flex;gap:6px;margin-top:4px;opacity:0;transition:opacity .5s .3s">
+              <span id="a6-cgf" style="font-size:11px;font-weight:700;color:#4A8DB8;font-family:-apple-system,sans-serif">0%</span>
+              <span style="font-size:10px;color:#CCC">·</span>
+              <span id="a6-ctm" style="font-size:11px;font-weight:700;color:#C9A84C;font-family:-apple-system,sans-serif">0%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Legend chips -->
+        <div style="display:flex;flex-direction:column;gap:7px;width:100%;margin-top:22px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="width:10px;height:10px;border-radius:2.5px;background:#1B3A5C;flex-shrink:0"></div>
+            <div style="flex:1;font-size:11.5px;font-weight:600;color:#1B3A5C;font-family:-apple-system,sans-serif">EterniTeam</div>
+            <div id="a6-lbl-et" style="font-size:13px;font-weight:800;color:#1B3A5C;font-family:-apple-system,sans-serif;letter-spacing:-.3px">100%</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="width:10px;height:10px;border-radius:2.5px;background:#4A8DB8;flex-shrink:0"></div>
+            <div style="flex:1;font-size:11.5px;font-weight:600;color:#4A8DB8;font-family:-apple-system,sans-serif">Geschäftsführung</div>
+            <div id="a6-lbl-gf" style="font-size:13px;font-weight:800;color:#4A8DB8;font-family:-apple-system,sans-serif;letter-spacing:-.3px">0%</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="width:10px;height:10px;border-radius:2.5px;background:#C9A84C;flex-shrink:0"></div>
+            <div style="flex:1;font-size:11.5px;font-weight:600;color:#C9A84C;font-family:-apple-system,sans-serif">Team (Mitarbeitende)</div>
+            <div id="a6-lbl-tm" style="font-size:13px;font-weight:800;color:#C9A84C;font-family:-apple-system,sans-serif;letter-spacing:-.3px">0%</div>
+          </div>
+        </div>
       </div>
-      <!-- mini-donut 1: 80/10/10 -->
-      <div class="a6-tl" id="a6t1" onclick="antGoTo(1)" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;opacity:.45;transition:opacity .35s,transform .35s">
-        <svg width="48" height="48" viewBox="0 0 48 48" style="transform:rotate(-90deg)">
-          <circle cx="24" cy="24" r="18" fill="none" stroke="#E8EAE6" stroke-width="6"/>
-          <circle cx="24" cy="24" r="18" fill="none" stroke="#C9A84C" stroke-width="6" stroke-dasharray="11.3 113.1" stroke-dashoffset="-101.8"/>
-          <circle cx="24" cy="24" r="18" fill="none" stroke="#4A8DB8" stroke-width="6" stroke-dasharray="11.3 113.1" stroke-dashoffset="-90.5"/>
-          <circle cx="24" cy="24" r="18" fill="none" stroke="#1B3A5C" stroke-width="6" stroke-dasharray="90.5 113.1"/>
-        </svg>
-        <div style="font-size:10px;font-weight:700;color:#1B3A5C;letter-spacing:.06em;font-family:-apple-system,sans-serif;text-align:center;line-height:1.3">Jahr 0<br><span style="font-weight:400;color:#8B919A;font-size:9px">Sofort</span></div>
-      </div>
-      <!-- mini-donut 2: 66/17/17 -->
-      <div class="a6-tl" id="a6t2" onclick="antGoTo(2)" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;opacity:.45;transition:opacity .35s,transform .35s">
-        <svg width="48" height="48" viewBox="0 0 48 48" style="transform:rotate(-90deg)">
-          <circle cx="24" cy="24" r="18" fill="none" stroke="#E8EAE6" stroke-width="6"/>
-          <circle cx="24" cy="24" r="18" fill="none" stroke="#C9A84C" stroke-width="6" stroke-dasharray="19.2 113.1" stroke-dashoffset="-93.9"/>
-          <circle cx="24" cy="24" r="18" fill="none" stroke="#4A8DB8" stroke-width="6" stroke-dasharray="19.2 113.1" stroke-dashoffset="-74.6"/>
-          <circle cx="24" cy="24" r="18" fill="none" stroke="#1B3A5C" stroke-width="6" stroke-dasharray="74.6 113.1"/>
-        </svg>
-        <div style="font-size:10px;font-weight:700;color:#1B3A5C;letter-spacing:.06em;font-family:-apple-system,sans-serif;text-align:center;line-height:1.3">Jahr 5<br><span style="font-weight:400;color:#8B919A;font-size:9px">Wachstum</span></div>
-      </div>
-      <!-- mini-donut 3: 20/40/40 -->
-      <div class="a6-tl" id="a6t3" onclick="antGoTo(3)" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;opacity:.45;transition:opacity .35s,transform .35s">
-        <svg width="48" height="48" viewBox="0 0 48 48" style="transform:rotate(-90deg)">
-          <circle cx="24" cy="24" r="18" fill="none" stroke="#E8EAE6" stroke-width="6"/>
-          <circle cx="24" cy="24" r="18" fill="none" stroke="#C9A84C" stroke-width="6" stroke-dasharray="45.2 113.1" stroke-dashoffset="-45.2"/>
-          <circle cx="24" cy="24" r="18" fill="none" stroke="#4A8DB8" stroke-width="6" stroke-dasharray="45.2 113.1" stroke-dashoffset="-22.6"/>
-          <circle cx="24" cy="24" r="18" fill="none" stroke="#1B3A5C" stroke-width="6" stroke-dasharray="22.6 113.1"/>
-        </svg>
-        <div style="font-size:10px;font-weight:700;color:#1B3A5C;letter-spacing:.06em;font-family:-apple-system,sans-serif;text-align:center;line-height:1.3">Jahr 15+<br><span style="font-weight:400;color:#8B919A;font-size:9px">Mehrheit</span></div>
+
+      <!-- RIGHT: Stage details -->
+      <div style="flex:1;display:flex;flex-direction:column;padding:36px 40px;min-width:0">
+
+        <!-- Stage header -->
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+          <div id="a6-badge" style="padding:5px 16px;border-radius:50px;background:#1B3A5C;color:#fff;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-family:-apple-system,sans-serif">Jahr 0 · Kauf</div>
+          <div id="a6-sublabel" style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#7A9E7E;font-family:-apple-system,sans-serif">Transaktion</div>
+        </div>
+        <div id="a6-title" style="font-size:28px;font-weight:800;color:#1B3A5C;letter-spacing:-.7px;line-height:1.18;margin-bottom:10px;font-family:-apple-system,sans-serif">100% Eigentum<br>bei EterniTeam</div>
+        <div id="a6-desc" style="font-size:14px;color:#8B919A;line-height:1.75;margin-bottom:26px;font-family:-apple-system,sans-serif">EterniTeam erwirbt <strong style="color:#1B3A5C">100%</strong> der Anteile. Sofortige Transaktionssicherheit für den Verkäufer.</div>
+
+        <!-- Bar chart -->
+        <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:28px">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:118px;font-size:12px;font-weight:600;color:#1B3A5C;font-family:-apple-system,sans-serif;flex-shrink:0">EterniTeam</div>
+            <div style="flex:1;height:6px;background:#E8EAE6;border-radius:4px;overflow:hidden">
+              <div id="a6-bar-et" style="height:100%;width:100%;background:linear-gradient(90deg,#1B3A5C,#2E5A8C);border-radius:4px;transition:width .9s cubic-bezier(.4,0,.2,1)"></div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:118px;font-size:12px;font-weight:600;color:#4A8DB8;font-family:-apple-system,sans-serif;flex-shrink:0">Geschäftsführung</div>
+            <div style="flex:1;height:6px;background:#E8EAE6;border-radius:4px;overflow:hidden">
+              <div id="a6-bar-gf" style="height:100%;width:0%;background:linear-gradient(90deg,#4A8DB8,#5AADDE);border-radius:4px;transition:width .9s cubic-bezier(.4,0,.2,1)"></div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:118px;font-size:12px;font-weight:600;color:#C9A84C;font-family:-apple-system,sans-serif;flex-shrink:0">Team (MA)</div>
+            <div style="flex:1;height:6px;background:#E8EAE6;border-radius:4px;overflow:hidden">
+              <div id="a6-bar-tm" style="height:100%;width:0%;background:linear-gradient(90deg,#C9A84C,#E8C46A);border-radius:4px;transition:width .9s cubic-bezier(.4,0,.2,1)"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Note box -->
+        <div id="a6-note" style="padding:16px 20px;background:rgba(122,158,126,.07);border-radius:14px;border-left:3px solid #7A9E7E;display:flex;gap:12px;align-items:flex-start;margin-top:auto">
+          <svg style="flex-shrink:0;margin-top:1px" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7A9E7E" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span id="a6-note-text" style="font-size:13px;color:#1B3A5C;line-height:1.65;font-family:-apple-system,sans-serif">Der Verkäufer erhält den vollen Kaufpreis und kann sich sicher zurückziehen.</span>
+        </div>
+
+        <!-- Mini timeline at bottom of right panel -->
+        <div style="display:flex;align-items:center;gap:0;margin-top:20px;padding-top:16px;border-top:1px solid rgba(27,58,92,.07)">
+          <div id="a6m0" onclick="antGoTo(0)" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;padding:8px 4px;border-radius:10px;transition:background .25s,transform .25s">
+            <svg width="36" height="36" viewBox="0 0 36 36" style="transform:rotate(-90deg)">
+              <circle cx="18" cy="18" r="13" fill="none" stroke="#E8EAE6" stroke-width="5"/>
+              <circle cx="18" cy="18" r="13" fill="none" stroke="#1B3A5C" stroke-width="5" stroke-dasharray="81.7 81.7"/>
+            </svg>
+            <div style="font-size:9.5px;font-weight:700;color:#1B3A5C;font-family:-apple-system,sans-serif;text-align:center;line-height:1.25">Jahr 0<br><span style="font-weight:400;color:#8B919A">Kauf</span></div>
+          </div>
+          <div style="height:1px;flex:0.3;background:rgba(27,58,92,.12)"></div>
+          <div id="a6m1" onclick="antGoTo(1)" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;padding:8px 4px;border-radius:10px;transition:background .25s,transform .25s">
+            <svg width="36" height="36" viewBox="0 0 36 36" style="transform:rotate(-90deg)">
+              <circle cx="18" cy="18" r="13" fill="none" stroke="#E8EAE6" stroke-width="5"/>
+              <circle cx="18" cy="18" r="13" fill="none" stroke="#C9A84C" stroke-width="5" stroke-dasharray="8.2 81.7" stroke-dashoffset="-73.5"/>
+              <circle cx="18" cy="18" r="13" fill="none" stroke="#4A8DB8" stroke-width="5" stroke-dasharray="8.2 81.7" stroke-dashoffset="-65.3"/>
+              <circle cx="18" cy="18" r="13" fill="none" stroke="#1B3A5C" stroke-width="5" stroke-dasharray="65.3 81.7"/>
+            </svg>
+            <div style="font-size:9.5px;font-weight:700;color:#1B3A5C;font-family:-apple-system,sans-serif;text-align:center;line-height:1.25">Jahr 0<br><span style="font-weight:400;color:#8B919A">Sofort</span></div>
+          </div>
+          <div style="height:1px;flex:0.3;background:rgba(27,58,92,.12)"></div>
+          <div id="a6m2" onclick="antGoTo(2)" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;padding:8px 4px;border-radius:10px;transition:background .25s,transform .25s">
+            <svg width="36" height="36" viewBox="0 0 36 36" style="transform:rotate(-90deg)">
+              <circle cx="18" cy="18" r="13" fill="none" stroke="#E8EAE6" stroke-width="5"/>
+              <circle cx="18" cy="18" r="13" fill="none" stroke="#C9A84C" stroke-width="5" stroke-dasharray="13.9 81.7" stroke-dashoffset="-67.8"/>
+              <circle cx="18" cy="18" r="13" fill="none" stroke="#4A8DB8" stroke-width="5" stroke-dasharray="13.9 81.7" stroke-dashoffset="-53.9"/>
+              <circle cx="18" cy="18" r="13" fill="none" stroke="#1B3A5C" stroke-width="5" stroke-dasharray="53.9 81.7"/>
+            </svg>
+            <div style="font-size:9.5px;font-weight:700;color:#1B3A5C;font-family:-apple-system,sans-serif;text-align:center;line-height:1.25">Jahr 5<br><span style="font-weight:400;color:#8B919A">Wachstum</span></div>
+          </div>
+          <div style="height:1px;flex:0.3;background:rgba(27,58,92,.12)"></div>
+          <div id="a6m3" onclick="antGoTo(3)" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;padding:8px 4px;border-radius:10px;transition:background .25s,transform .25s">
+            <svg width="36" height="36" viewBox="0 0 36 36" style="transform:rotate(-90deg)">
+              <circle cx="18" cy="18" r="13" fill="none" stroke="#E8EAE6" stroke-width="5"/>
+              <circle cx="18" cy="18" r="13" fill="none" stroke="#C9A84C" stroke-width="5" stroke-dasharray="32.7 81.7" stroke-dashoffset="-32.7"/>
+              <circle cx="18" cy="18" r="13" fill="none" stroke="#4A8DB8" stroke-width="5" stroke-dasharray="32.7 81.7" stroke-dashoffset="-16.3"/>
+              <circle cx="18" cy="18" r="13" fill="none" stroke="#1B3A5C" stroke-width="5" stroke-dasharray="16.3 81.7"/>
+            </svg>
+            <div style="font-size:9.5px;font-weight:700;color:#1B3A5C;font-family:-apple-system,sans-serif;text-align:center;line-height:1.25">Jahr 15+<br><span style="font-weight:400;color:#8B919A">Mehrheit</span></div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -1599,31 +1643,35 @@ document.addEventListener('keydown', e => {
 });
 
 // ─── BETEILIGUNGSMODELL ANIMATION (Slide 6) ───
-const A6_CIRC = 2 * Math.PI * 104; // ≈ 653.5
+const A6_CIRC = 2 * Math.PI * 90; // ≈ 565.5
 const a6stages = [
   {
     et:100, gf:0,  tm:0,
     badge:'Jahr 0 · Kauf', sub:'Transaktion',
     title:'100% Eigentum<br>bei EterniTeam',
-    desc:'EterniTeam erwirbt <strong style="color:#1B3A5C">100%</strong> der Anteile. Sofortige Transaktionssicherheit für den Verkäufer.'
+    desc:'EterniTeam erwirbt <strong style="color:#1B3A5C">100%</strong> der Anteile. Sofortige Transaktionssicherheit für den Verkäufer.',
+    note:'Der Verkäufer erhält den vollen Kaufpreis und kann sich sicher zurückziehen.'
   },
   {
     et:80, gf:10, tm:10,
     badge:'Jahr 0 · Sofort', sub:'Tag 1',
     title:'Sofortbeteiligung<br>für Führung & Team',
-    desc:'Neue GF und Team erhalten <strong style="color:#1B3A5C">je 10%</strong> ab Tag 1 — ohne eigenes Kapital. EterniTeam hält 80%.'
+    desc:'Neue GF und Team erhalten <strong style="color:#1B3A5C">je 10%</strong> ab Tag 1 — ohne eigenes Kapital. EterniTeam hält <strong style="color:#1B3A5C">80%</strong>.',
+    note:'Die neue Führung beginnt direkt als Gesellschafter — Alignment vom ersten Tag.'
   },
   {
     et:66, gf:17, tm:17,
     badge:'Jahr 5', sub:'Wachstum',
-    title:'Wachsende<br>Beteiligung',
-    desc:'Nach 5 Jahren hält das Führungsteam bereits <strong style="color:#1B3A5C">34%</strong>. EterniTeam behält die Mehrheit.'
+    title:'Sukzessiver<br>Anteilsübergang',
+    desc:'Nach 5 Jahren hält das Führungsteam bereits <strong style="color:#1B3A5C">34%</strong>. EterniTeam behält die strategische Mehrheit.',
+    note:'Stabile Partnerschaft: EterniTeam und das Team wachsen gemeinsam.'
   },
   {
     et:20, gf:40, tm:40,
     badge:'Jahr 15+', sub:'Mehrheit',
     title:'80% Eigentum<br>beim Team',
-    desc:'Das Führungsteam hält die <strong style="color:#1B3A5C">Mehrheit von 80%</strong>. Das Lebenswerk ist vollständig übergeben.'
+    desc:'Das Führungsteam hält die <strong style="color:#1B3A5C">Mehrheit von 80%</strong>. Das Lebenswerk ist vollständig übergeben.',
+    note:'Das Unternehmen gehört seinem Team — so wie der Gründer es sich gewünscht hat.'
   }
 ];
 let a6cur = 0, a6timer = null;
@@ -1636,7 +1684,7 @@ function antGoTo(idx) {
   const gfA = C * s.gf / 100;
   const tmA = C * s.tm / 100;
 
-  // Update donut segments
+  // Donut segments
   const etEl = document.getElementById('a6-et');
   const gfEl = document.getElementById('a6-gf');
   const tmEl = document.getElementById('a6-tm');
@@ -1644,7 +1692,7 @@ function antGoTo(idx) {
   if(gfEl) { gfEl.style.strokeDasharray = `${gfA} ${C}`; gfEl.style.strokeDashoffset = -etA; }
   if(tmEl) { tmEl.style.strokeDasharray = `${tmA} ${C}`; tmEl.style.strokeDashoffset = -(etA + gfA); }
 
-  // Center %
+  // Center numbers
   const cpct = document.getElementById('a6-cpct');
   if(cpct) antCountUp(cpct, s.et, '%');
   const cgf = document.getElementById('a6-cgf');
@@ -1654,42 +1702,52 @@ function antGoTo(idx) {
   const subs = document.getElementById('a6-cpcts2');
   if(subs) subs.style.opacity = s.gf > 0 ? '1' : '0';
 
-  // Right panel — fade out/in
-  ['a6-title','a6-desc','a6-badge','a6-sublabel'].forEach(id => {
+  // Legend numbers
+  const lblEt = document.getElementById('a6-lbl-et');
+  const lblGf = document.getElementById('a6-lbl-gf');
+  const lblTm = document.getElementById('a6-lbl-tm');
+  if(lblEt) antCountUp(lblEt, s.et, '%');
+  if(lblGf) antCountUp(lblGf, s.gf, '%');
+  if(lblTm) antCountUp(lblTm, s.tm, '%');
+
+  // Bars
+  const barEt = document.getElementById('a6-bar-et');
+  const barGf = document.getElementById('a6-bar-gf');
+  const barTm = document.getElementById('a6-bar-tm');
+  if(barEt) barEt.style.width = s.et + '%';
+  if(barGf) barGf.style.width = s.gf + '%';
+  if(barTm) barTm.style.width = s.tm + '%';
+
+  // Right panel fade
+  ['a6-title','a6-desc','a6-badge','a6-sublabel','a6-note-text'].forEach(id => {
     const el = document.getElementById(id);
-    if(el) { el.style.opacity = '0'; el.style.transform = 'translateY(6px)'; }
+    if(el) { el.style.opacity='0'; el.style.transform='translateY(5px)'; }
   });
   setTimeout(() => {
     const t = document.getElementById('a6-title');
     const d = document.getElementById('a6-desc');
     const b = document.getElementById('a6-badge');
     const sl = document.getElementById('a6-sublabel');
-    if(t) { t.innerHTML = s.title; t.style.opacity='1'; t.style.transform='translateY(0)'; }
-    if(d) { d.innerHTML = s.desc; d.style.opacity='1'; d.style.transform='translateY(0)'; }
-    if(b) { b.textContent = s.badge; b.style.opacity='1'; b.style.transform='translateY(0)'; }
-    if(sl) { sl.textContent = s.sub; sl.style.opacity='1'; sl.style.transform='translateY(0)'; }
-  }, 180);
+    const nt = document.getElementById('a6-note-text');
+    if(t) { t.innerHTML=s.title; t.style.opacity='1'; t.style.transform='translateY(0)'; }
+    if(d) { d.innerHTML=s.desc; d.style.opacity='1'; d.style.transform='translateY(0)'; }
+    if(b) { b.textContent=s.badge; b.style.opacity='1'; b.style.transform='translateY(0)'; }
+    if(sl) { sl.textContent=s.sub; sl.style.opacity='1'; sl.style.transform='translateY(0)'; }
+    if(nt) { nt.textContent=s.note; nt.style.opacity='1'; nt.style.transform='translateY(0)'; }
+  }, 160);
 
-  // Bars
-  const barEt = document.getElementById('a6-bar-et');
-  const barGf = document.getElementById('a6-bar-gf');
-  const barTm = document.getElementById('a6-bar-tm');
-  const lblEt = document.getElementById('a6-lbl-et');
-  const lblGf = document.getElementById('a6-lbl-gf');
-  const lblTm = document.getElementById('a6-lbl-tm');
-  if(barEt) barEt.style.width = s.et + '%';
-  if(barGf) barGf.style.width = s.gf + '%';
-  if(barTm) barTm.style.width = s.tm + '%';
-  if(lblEt) antCountUp(lblEt, s.et, '%');
-  if(lblGf) antCountUp(lblGf, s.gf, '%');
-  if(lblTm) antCountUp(lblTm, s.tm, '%');
+  // Stage tabs (top-right)
+  for(let i=0;i<4;i++) {
+    const tab = document.getElementById('a6t'+i);
+    if(tab) tab.className = 'a6-stab' + (i===idx?' a6-stab-on':'');
+  }
 
-  // Timeline highlight
-  for(let i = 0; i < 4; i++) {
-    const tl = document.getElementById('a6t' + i);
-    if(tl) {
-      tl.style.opacity = i === idx ? '1' : '.4';
-      tl.style.transform = i === idx ? 'scale(1.08)' : 'scale(1)';
+  // Mini timeline highlight
+  for(let i=0;i<4;i++) {
+    const m = document.getElementById('a6m'+i);
+    if(m) {
+      m.style.background = i===idx ? 'rgba(27,58,92,.07)' : 'transparent';
+      m.style.transform = i===idx ? 'scale(1.06)' : 'scale(1)';
     }
   }
 }
