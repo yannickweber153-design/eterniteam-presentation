@@ -981,67 +981,64 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
 ═══════════════════════════════════════════════ -->
 <div class="slide" id="s6">
   <div class="grid-bg absolute inset-0"></div>
-  <div class="slide-inner">
-    <div style="margin-bottom:20px">
-      <div class="label afu" style="margin-bottom:12px">Beteiligungsmodell</div>
-      <h2 class="h2 afu d2">Durch Anteilsrückkäufe wird das Team<br>sukzessive zur Mehrheit.</h2>
+  <div class="slide-inner" style="display:flex;flex-direction:column;padding:52px 72px 40px">
+
+    <!-- Header -->
+    <div class="afu" style="margin-bottom:28px">
+      <div class="label" style="margin-bottom:10px">Beteiligungsmodell</div>
+      <h2 class="h2">Durch Anteilsrückkäufe wird das Team<br>sukzessive zur Mehrheit.</h2>
     </div>
 
-    <div class="afu d3" style="display:flex;gap:10px;margin-bottom:28px;flex-wrap:wrap">
-      <button class="ptab on" id="pt0" onclick="showPhase(0)">Jahr 0 · Kauf</button>
-      <button class="ptab" id="pt1" onclick="showPhase(1)">Jahr 0 · Initial</button>
-      <button class="ptab" id="pt2" onclick="showPhase(2)">Jahr 5</button>
-      <button class="ptab" id="pt3" onclick="showPhase(3)">Jahr 15+</button>
-    </div>
+    <!-- Video container -->
+    <div class="afu d2" style="flex:1;display:flex;align-items:center;justify-content:center;position:relative">
+      <div style="
+        position:relative;
+        width:100%;
+        max-width:960px;
+        border-radius:20px;
+        overflow:hidden;
+        box-shadow:0 24px 80px rgba(27,58,92,.14), 0 4px 16px rgba(27,58,92,.07);
+        background:#f5f6f4;
+        border:1px solid rgba(27,58,92,.06);
+      ">
+        <video
+          id="anteile-video"
+          src="anteile.mp4"
+          style="width:100%;display:block;border-radius:20px;"
+          preload="auto"
+          playsinline
+          muted
+        ></video>
 
-    <div class="afu d5" style="display:flex;gap:48px;flex:1;align-items:center">
-      <!-- Donut Chart -->
-      <div style="flex-shrink:0;width:220px;height:220px;position:relative">
-        <svg width="220" height="220" viewBox="0 0 220 220">
-          <circle cx="110" cy="110" r="82" fill="none" stroke="#F3F4F6" stroke-width="24"/>
-          <circle id="seg-et" cx="110" cy="110" r="82" fill="none" stroke="var(--navy)" stroke-width="24"
-            stroke-dasharray="515.2" stroke-dashoffset="0" transform="rotate(-90 110 110)"
-            style="transition:stroke-dashoffset .9s cubic-bezier(.4,0,.2,1),stroke-dasharray .9s cubic-bezier(.4,0,.2,1)"/>
-          <circle id="seg-gf" cx="110" cy="110" r="82" fill="none" stroke="#4A90B8" stroke-width="24"
-            stroke-dasharray="0 515.2" stroke-dashoffset="0" transform="rotate(-90 110 110)"
-            style="transition:stroke-dashoffset .9s cubic-bezier(.4,0,.2,1),stroke-dasharray .9s cubic-bezier(.4,0,.2,1)"/>
-          <circle id="seg-tm" cx="110" cy="110" r="82" fill="none" stroke="#9CA3AF" stroke-width="24"
-            stroke-dasharray="0 515.2" stroke-dashoffset="0" transform="rotate(-90 110 110)"
-            style="transition:stroke-dashoffset .9s cubic-bezier(.4,0,.2,1),stroke-dasharray .9s cubic-bezier(.4,0,.2,1)"/>
-          <text id="c-pct" x="110" y="104" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="24" font-weight="800" fill="var(--navy)">100%</text>
-          <text id="c-lbl" x="110" y="124" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="11" fill="var(--gray2)">EterniTeam</text>
-        </svg>
-      </div>
-
-      <!-- Details -->
-      <div style="flex:1">
-        <div id="ph-title" class="h3" style="margin-bottom:8px">Kauf – Jahr 0</div>
-        <div id="ph-desc" class="body" style="margin-bottom:24px;max-width:440px">EterniTeam erwirbt <strong>100%</strong> der Anteile. Sofortige Transaktionssicherheit für den Verkäufer.</div>
-
-        <div style="display:flex;flex-direction:column;gap:12px;max-width:360px;margin-bottom:20px">
-          <div style="display:flex;align-items:center;gap:12px">
-            <div style="width:12px;height:12px;background:var(--navy);border-radius:3px;flex-shrink:0"></div>
-            <div style="flex:1;font-size:13px;font-weight:600;color:var(--navy)">EterniTeam</div>
-            <div id="et-p" style="font-size:18px;font-weight:800;color:var(--navy)">100%</div>
-          </div>
-          <div id="leg-gf" style="display:flex;align-items:center;gap:12px;opacity:.2;transition:opacity .5s">
-            <div style="width:12px;height:12px;background:#4A90B8;border-radius:3px;flex-shrink:0"></div>
-            <div style="flex:1;font-size:13px;font-weight:600;color:var(--navy)">Neue Geschäftsführung</div>
-            <div id="gf-p" style="font-size:18px;font-weight:800;color:#4A90B8">0%</div>
-          </div>
-          <div id="leg-tm" style="display:flex;align-items:center;gap:12px;opacity:.2;transition:opacity .5s">
-            <div style="width:12px;height:12px;background:#9CA3AF;border-radius:3px;flex-shrink:0"></div>
-            <div style="flex:1;font-size:13px;font-weight:600;color:var(--navy)">Team (Mitarbeitende)</div>
-            <div id="tm-p" style="font-size:18px;font-weight:800;color:#9CA3AF">0%</div>
-          </div>
-        </div>
-
-        <div id="ph-note" style="padding:14px 18px;background:var(--sage3);border-radius:12px;border-left:3px solid var(--sage);font-size:13px;color:var(--navy);line-height:1.6;display:flex;gap:12px;align-items:flex-start">
-          <svg style="flex-shrink:0;margin-top:1px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          <span id="ph-note-text">Der Verkäufer erhält den vollen Kaufpreis und kann sich sicher zurückziehen.</span>
+        <!-- Play/Pause overlay -->
+        <div id="anteile-controls" style="
+          position:absolute;bottom:16px;right:20px;
+          display:flex;gap:10px;align-items:center;
+          opacity:0;transition:opacity .25s;
+        ">
+          <button onclick="antReplay()" style="
+            width:36px;height:36px;border-radius:50%;
+            background:rgba(27,58,92,.75);border:none;cursor:pointer;
+            display:flex;align-items:center;justify-content:center;
+            backdrop-filter:blur(6px);
+          ">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.37"/>
+            </svg>
+          </button>
+          <button id="anteile-playbtn" onclick="antToggle()" style="
+            width:36px;height:36px;border-radius:50%;
+            background:rgba(27,58,92,.75);border:none;cursor:pointer;
+            display:flex;align-items:center;justify-content:center;
+            backdrop-filter:blur(6px);
+          ">
+            <svg id="ant-icon-pause" width="16" height="16" viewBox="0 0 24 24" fill="#fff"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+            <svg id="ant-icon-play" width="16" height="16" viewBox="0 0 24 24" fill="#fff" style="display:none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </button>
         </div>
       </div>
     </div>
+
   </div>
 </div>
 
@@ -1435,8 +1432,7 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
 <script>
 const TOTAL = 12;
 const LABELS = ['INTRO','PROBLEM','LÖSUNG','WIN-WIN','VERGLEICH','KRITERIEN','MODELL','ZUKUNFT','REFERENZEN','TEAM','INVESTOREN','KONTAKT'];
-const C = 2 * Math.PI * 82; // donut circumference ~515.2
-let cur = 0, busy = false, activePhase = 0;
+let cur = 0, busy = false;
 
 // Build timeline stepper
 const stepNodes = document.getElementById('step-nodes');
@@ -1495,7 +1491,7 @@ function goTo(idx) {
     fromEl.style.cssText = '';
     toEl.style.transition = '';
     busy = false;
-    if(idx === 6) setTimeout(() => showPhase(activePhase), 200);
+    if(idx === 6) setTimeout(() => antAutoPlay(), 200);
     if(idx === 11) document.querySelectorAll('.btn-p.pulse').forEach(b => {
       b.style.animation = 'none'; b.offsetHeight; b.style.animation = '';
     });
@@ -1537,66 +1533,44 @@ document.addEventListener('keydown', e => {
   if(e.key === 'ArrowLeft')  { e.preventDefault(); goTo(cur - 1); }
 });
 
-// ─── PHASE SWITCHER (Slide 6) ───
-const phases = [
-  { et:100, gf:0, tm:0, title:'Kauf – Jahr 0', desc:'EterniTeam erwirbt <strong>100%</strong> der Anteile. Sofortige Transaktionssicherheit für den Verkäufer.', note:'Der Verkäufer erhält den vollen Kaufpreis und kann sich sicher zurückziehen.' },
-  { et:74, gf:17, tm:9,  title:'Initial – Jahr 0', desc:'Nach Übernahme erhält die <strong>neue GF 17%</strong> und das Team <strong>9%</strong> – sofort ab Tag 1.', note:'Die neue Führung beginnt direkt als Gesellschafter – ohne eigenes Kapital.' },
-  { et:51, gf:30, tm:19, title:'Jahr 5', desc:'Durch Anteilsrückkäufe hält das Führungsteam bereits <strong>49%</strong>. EterniTeam behält Mehrheit.', note:'Stabile Partnerschaft: EterniTeam und das Führungsteam wachsen gemeinsam.' },
-  { et:20, gf:51, tm:29, title:'Jahr 15+', desc:'Das Führungsteam hält die <strong>Mehrheit von 80%</strong>. Das Lebenswerk ist vollständig übergeben.', note:'Das Unternehmen gehört seinem Team – so wie der Gründer es sich gewünscht hat.' },
-];
-
-function showPhase(idx) {
-  activePhase = idx;
-  const p = phases[idx];
-  for(let i = 0; i < 4; i++) {
-    const t = document.getElementById('pt' + i);
-    if(t) t.className = 'ptab' + (i === idx ? ' on' : '');
-  }
-  const circ = C;
-  const etArc  = circ * p.et  / 100;
-  const gfArc  = circ * p.gf  / 100;
-  const tmArc  = circ * p.tm  / 100;
-  const etOff  = 0;
-  const gfOff  = -(etArc);
-  const tmOff  = -(etArc + gfArc);
-
-  document.getElementById('seg-et').style.strokeDasharray  = `${etArc} ${circ}`;
-  document.getElementById('seg-et').style.strokeDashoffset = etOff;
-  document.getElementById('seg-gf').style.strokeDasharray  = `${gfArc} ${circ}`;
-  document.getElementById('seg-gf').style.strokeDashoffset = gfOff;
-  document.getElementById('seg-tm').style.strokeDasharray  = `${tmArc} ${circ}`;
-  document.getElementById('seg-tm').style.strokeDashoffset = tmOff;
-
-  document.getElementById('c-pct').textContent = p.et + '%';
-  document.getElementById('c-lbl').textContent = 'EterniTeam';
-  document.getElementById('et-p').textContent  = p.et + '%';
-  document.getElementById('gf-p').textContent  = p.gf + '%';
-  document.getElementById('tm-p').textContent  = p.tm + '%';
-  document.getElementById('ph-title').textContent = p.title;
-  document.getElementById('ph-desc').innerHTML   = p.desc;
-  document.getElementById('ph-note-text').textContent = p.note;
-  document.getElementById('leg-gf').style.opacity = p.gf > 0 ? '1' : '.2';
-  document.getElementById('leg-tm').style.opacity = p.tm > 0 ? '1' : '.2';
-  // Animate counting numbers
-  animateCount('et-p', p.et, '%');
-  animateCount('gf-p', p.gf, '%');
-  animateCount('tm-p', p.tm, '%');
-  animateCount('c-pct', p.et, '%');
+// ─── ANTEILE VIDEO PLAYER (Slide 6) ───
+function antAutoPlay() {
+  const v = document.getElementById('anteile-video');
+  const ctrl = document.getElementById('anteile-controls');
+  if(!v) return;
+  v.currentTime = 0;
+  v.play().catch(() => {});
+  // Show controls on hover
+  const wrap = v.parentElement;
+  wrap.addEventListener('mouseenter', () => { if(ctrl) ctrl.style.opacity = '1'; });
+  wrap.addEventListener('mouseleave', () => { if(ctrl) ctrl.style.opacity = '0'; });
+  v.addEventListener('ended', () => {
+    document.getElementById('ant-icon-pause').style.display = 'none';
+    document.getElementById('ant-icon-play').style.display = '';
+  });
+  document.getElementById('ant-icon-pause').style.display = '';
+  document.getElementById('ant-icon-play').style.display = 'none';
 }
-
-function animateCount(id, target, suffix) {
-  const el = document.getElementById(id);
-  if(!el) return;
-  const start = parseInt(el.textContent) || 0;
-  const dur = 600, fps = 30, steps = dur/1000*fps;
-  let i = 0;
-  const timer = setInterval(() => {
-    i++;
-    const val = Math.round(start + (target - start) * (i/steps));
-    el.textContent = val + suffix;
-    el.classList.add('count-anim');
-    if(i >= steps) { el.textContent = target + suffix; clearInterval(timer); }
-  }, 1000/fps);
+function antToggle() {
+  const v = document.getElementById('anteile-video');
+  if(!v) return;
+  if(v.paused) {
+    v.play();
+    document.getElementById('ant-icon-pause').style.display = '';
+    document.getElementById('ant-icon-play').style.display = 'none';
+  } else {
+    v.pause();
+    document.getElementById('ant-icon-pause').style.display = 'none';
+    document.getElementById('ant-icon-play').style.display = '';
+  }
+}
+function antReplay() {
+  const v = document.getElementById('anteile-video');
+  if(!v) return;
+  v.currentTime = 0;
+  v.play();
+  document.getElementById('ant-icon-pause').style.display = '';
+  document.getElementById('ant-icon-play').style.display = 'none';
 }
 
 
