@@ -706,11 +706,21 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
     </div>
 
     <!-- Big Stat -->
-    <div class="afu d8" style="margin-top:32px;padding:20px 28px;border-radius:var(--r);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:24px">
-      <div style="font-size:clamp(48px,5.5vw,72px);font-weight:900;color:#fff;line-height:1;letter-spacing:-.04em;flex-shrink:0">30.000</div>
-      <div>
-        <div style="font-size:17px;font-weight:700;color:#fff;margin-bottom:8px;line-height:1.4">Unternehmen suchen jährlich in Deutschland eine Nachfolge</div>
-        <div style="font-size:14px;color:rgba(255,255,255,.55);line-height:1.7">Nur ein Bruchteil findet die richtige Lösung.<br>Die meisten enden in falschen Händen.</div>
+    <div class="afu d8" style="margin-top:32px;padding:24px 0 0;border-top:1px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:32px">
+      <div style="flex-shrink:0">
+        <div style="font-size:clamp(80px,9vw,120px);font-weight:900;line-height:1;letter-spacing:-.04em;background:linear-gradient(135deg,#fff 60%,rgba(122,158,126,.8));-webkit-background-clip:text;-webkit-text-fill-color:transparent">30.000</div>
+        <div style="font-size:17px;font-weight:700;color:#fff;margin-top:6px;line-height:1.4">Unternehmen suchen jährlich</div>
+        <div style="font-size:15px;color:rgba(255,255,255,.55);line-height:1.5">eine Nachfolge in Deutschland</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;flex-shrink:0">
+        <div style="padding:10px 16px;border-radius:50px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15)">
+          <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px">davon</div>
+          <div style="font-size:13px;font-weight:600;color:#fff">nur ~20% erfolgreich gelöst</div>
+        </div>
+        <div style="padding:10px 16px;border-radius:50px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15)">
+          <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px">durchschnittlich</div>
+          <div style="font-size:13px;font-weight:600;color:#fff">∅ 7 Jahre Suche</div>
+        </div>
       </div>
     </div>
   </div>
@@ -945,6 +955,7 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
     <div class="afu d4" style="display:flex;gap:16px;flex:1;align-items:stretch">
       <!-- Box 1 -->
       <div class="card card-hover" style="flex:1;padding:24px;display:flex;flex-direction:column">
+        <div style="font-size:44px;font-weight:900;color:var(--navy);letter-spacing:-2px;line-height:1;margin-bottom:12px;opacity:.15">100%</div>
         <div class="ic ic-lg ic-navy" style="margin-bottom:16px">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
         </div>
@@ -960,6 +971,7 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
       <!-- Box 2 – FEATURED -->
       <div class="card-feat" style="flex:1.15;padding:24px;display:flex;flex-direction:column">
         <div class="feat-star">Fokus</div>
+        <div style="font-size:44px;font-weight:900;color:var(--sage);letter-spacing:-2px;line-height:1;margin-bottom:12px;opacity:.2">7+</div>
         <div class="ic ic-lg ic-sage" style="margin-bottom:16px;margin-top:8px">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
         </div>
@@ -975,6 +987,7 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
 
       <!-- Box 3 -->
       <div class="card card-hover" style="flex:1;padding:24px;display:flex;flex-direction:column">
+        <div style="font-size:44px;font-weight:900;color:var(--gold);letter-spacing:-2px;line-height:1;margin-bottom:12px;opacity:.2">€2M</div>
         <div class="ic ic-lg ic-gold" style="margin-bottom:16px">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
         </div>
@@ -1356,10 +1369,14 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
       <!-- Dennis Konrad -->
       <div class="card card-hover afu d4" style="padding:24px">
         <div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:16px">
-          <div class="avatar" style="background:linear-gradient(135deg,var(--navy),var(--sage))">DK</div>
+          <div style="width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,#1B3A5C 0%,#2E5A8C 100%);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;color:#fff;letter-spacing:-.5px;flex-shrink:0;box-shadow:0 8px 24px rgba(27,58,92,.25)">DK</div>
           <div>
             <div class="h4">Dennis Konrad</div>
             <div class="body-sm" style="color:var(--sage)">Co-Founder & CIO · Ihr Ansprechpartner</div>
+            <span style="display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:50px;background:rgba(122,158,126,.12);border:1px solid rgba(122,158,126,.25);font-size:9px;font-weight:700;color:var(--sage);letter-spacing:.08em;text-transform:uppercase;margin-top:3px">
+              <svg width="8" height="8" viewBox="0 0 24 24" fill="var(--sage)"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              Hauptansprechpartner
+            </span>
           </div>
         </div>
         <div class="body-sm" style="margin-bottom:16px">Zentrale Anlaufstelle für Anfragen – zuständig für Sichtung, Auswahl und Koordination des EterniTeam Dealflows.</div>
@@ -1381,7 +1398,7 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
       <!-- Matthias Wilrich -->
       <div class="card card-hover afu d5" style="padding:24px">
         <div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:16px">
-          <div class="avatar" style="background:linear-gradient(135deg,#3B7DD8,var(--navy))">MW</div>
+          <div style="width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,#2B6CB0 0%,#1B3A5C 100%);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;color:#fff;letter-spacing:-.5px;flex-shrink:0;box-shadow:0 8px 24px rgba(43,108,176,.22)">MW</div>
           <div>
             <div class="h4">Matthias Wilrich</div>
             <div class="body-sm" style="color:var(--sage)">Co-Founder & CEO</div>
@@ -1404,15 +1421,15 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
         <div class="advisor-body" id="advisor-body">
           <div style="display:flex;gap:10px;flex-wrap:wrap;padding:12px 0 4px">
             <div class="pill" style="gap:8px;padding:7px 14px">
-              <div class="avatar" style="width:28px;height:28px;font-size:11px;background:linear-gradient(135deg,#6B46C1,#9333EA)">JR</div>
+              <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#5B21B6,#7C3AED);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;flex-shrink:0">JR</div>
               Jan Roschke · Director Operations
             </div>
             <div class="pill" style="gap:8px;padding:7px 14px">
-              <div class="avatar" style="width:28px;height:28px;font-size:11px;background:linear-gradient(135deg,#0F766E,#14B8A6)">CM</div>
+              <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#0D6B63,#0F9E8E);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;flex-shrink:0">CM</div>
               Clemens Meyer · VP Product & Engineering
             </div>
             <div class="pill" style="gap:8px;padding:7px 14px">
-              <div class="avatar" style="width:28px;height:28px;font-size:11px;background:linear-gradient(135deg,#B45309,#D97706)">SS</div>
+              <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#92400E,#D97706);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;flex-shrink:0">SS</div>
               Sevkan Saylik · Director HR
             </div>
           </div>
@@ -1436,13 +1453,16 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
     <div class="inv-grid" style="flex:1;align-content:start">
       <div class="card card-hover afu d4" style="padding:24px;text-align:center;border:2px solid var(--sage);box-shadow:0 6px 24px rgba(122,158,126,.18)">
         <div class="kpi-pill" style="margin-bottom:8px;font-size:10px">Hauptinvestor</div>
-        <div style="font-size:11px;font-weight:800;letter-spacing:.15em;color:var(--navy);text-transform:uppercase;margin-bottom:10px;padding:10px;background:var(--sage3);border-radius:10px">MOTIVE<br>VENTURES</div>
+        <div style="display:inline-flex;align-items:center;justify-content:center;padding:12px 20px;background:linear-gradient(135deg,rgba(27,58,92,.06),rgba(122,158,126,.06));border:1px solid rgba(27,58,92,.12);border-radius:14px;margin-bottom:10px">
+          <span style="font-size:14px;font-weight:900;color:var(--navy);letter-spacing:-.3px">Motive</span>
+          <span style="font-size:14px;font-weight:400;color:var(--sage);letter-spacing:-.3px;margin-left:4px">Ventures</span>
+        </div>
         <div class="h4" style="margin-bottom:8px">Motive Ventures</div>
         <div class="body-sm">Führender Venture-Investor mit umfassender Erfahrung in Unternehmertum und Skalierung.</div>
       </div>
 
       <div class="card card-hover afu d5" style="padding:24px;text-align:center">
-        <div class="avatar" style="background:linear-gradient(135deg,var(--navy),#3B7DD8);margin:0 auto 12px;width:52px;height:52px;font-size:18px">OH</div>
+        <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#1B3A5C 0%,#3B7DD8 100%);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;color:#fff;letter-spacing:-.5px;margin:0 auto 12px">OH</div>
         <div class="h4" style="margin-bottom:6px">Oskar Hartmann</div>
         <div class="badge badge-sage" style="margin-bottom:12px">Unternehmer-Investor</div>
         <div class="body-sm">Serial Entrepreneur mit mehreren erfolgreichen Exits.</div>
@@ -1452,7 +1472,7 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
       </div>
 
       <div class="card card-hover afu d6" style="padding:24px;text-align:center">
-        <div class="avatar" style="background:linear-gradient(135deg,#7C3AED,#A855F7);margin:0 auto 12px;width:52px;height:52px;font-size:18px">RK</div>
+        <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#6D28D9 0%,#7C3AED 100%);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;color:#fff;letter-spacing:-.5px;margin:0 auto 12px">RK</div>
         <div class="h4" style="margin-bottom:6px">Roman Kirsch</div>
         <div class="badge badge-sage" style="margin-bottom:12px">Unternehmer-Investor</div>
         <div class="body-sm">Gründer und Skalierungsexperte mit bewiesener Erfolgsbilanz im E-Commerce.</div>
@@ -1462,7 +1482,7 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
       </div>
 
       <div class="card card-hover afu d7" style="padding:24px;text-align:center">
-        <div class="avatar" style="background:linear-gradient(135deg,#0F766E,#14B8A6);margin:0 auto 12px;width:52px;height:52px;font-size:16px">GS</div>
+        <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#065F46 0%,#0F766E 100%);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;color:#fff;letter-spacing:-.5px;margin:0 auto 12px">GS</div>
         <div class="h4" style="margin-bottom:6px">Gebrüder Swoboda</div>
         <div class="badge badge-sage" style="margin-bottom:12px">Unternehmer-Investoren</div>
         <div class="body-sm">Erfahrene Unternehmer mit mehreren erfolgreichen Company-Builds.</div>
@@ -1492,16 +1512,21 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
   <div class="orb" style="width:600px;height:600px;background:radial-gradient(circle,rgba(122,158,126,.12) 0%,transparent 65%);top:-150px;right:-150px"></div>
   <div class="orb" style="width:400px;height:400px;background:radial-gradient(circle,rgba(27,58,92,.07) 0%,transparent 65%);bottom:-100px;left:-100px;animation-delay:4s"></div>
 
+  <!-- Center ring anchor -->
+  <div style="position:absolute;width:480px;height:480px;border-radius:50%;border:1px solid rgba(27,58,92,.06);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none"></div>
+  <div style="position:absolute;width:320px;height:320px;border-radius:50%;border:1px solid rgba(122,158,126,.08);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none"></div>
+  <div style="position:absolute;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(122,158,126,.07),transparent);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none"></div>
+
   <div class="slide-inner" style="align-items:center;justify-content:center;text-align:center">
     <div>
       
-      <div class="label afu d2" style="margin-bottom:16px">Der nächste Schritt</div>
+      <div class="label afu d2" style="margin-bottom:16px;font-size:11px;letter-spacing:.3em">Der nächste Schritt</div>
       <h1 class="h1 afu d3" style="margin-bottom:16px">Ihr Lebenswerk verdient<br>die <span class="grad-text">richtige Nachfolge.</span></h1>
       <p class="body afu d5" style="max-width:480px;margin:0 auto 36px">
         Sprechen Sie mit uns. Unverbindlich, vertraulich und auf Augenhöhe.<br>Wir verstehen, was Sie aufgebaut haben.
       </p>
       <div class="afu d7" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;align-items:center">
-        <a href="mailto:deal@eterniteam.de" class="btn-p pulse" style="font-size:15px;padding:15px 32px">
+        <a href="mailto:deal@eterniteam.de" class="btn-p pulse" style="font-size:16px;padding:17px 40px;border-radius:16px;letter-spacing:-.01em">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           deal@eterniteam.de
         </a>
