@@ -981,61 +981,126 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
 ═══════════════════════════════════════════════ -->
 <div class="slide" id="s6">
   <div class="grid-bg absolute inset-0"></div>
-  <div class="slide-inner" style="display:flex;flex-direction:column;padding:52px 72px 40px">
+  <div class="slide-inner" style="padding:44px 72px 28px;display:flex;flex-direction:column">
 
     <!-- Header -->
-    <div class="afu" style="margin-bottom:28px">
+    <div class="afu" style="margin-bottom:22px">
       <div class="label" style="margin-bottom:10px">Beteiligungsmodell</div>
-      <h2 class="h2">Durch Anteilsrückkäufe wird das Team<br>sukzessive zur Mehrheit.</h2>
+      <h2 class="h2">Durch Anteilsrückkäufe wird das Team<br>sukzessive zur <span class="grad-text">Mehrheit.</span></h2>
     </div>
 
-    <!-- Video container -->
-    <div class="afu d2" style="flex:1;display:flex;align-items:center;justify-content:center;position:relative">
-      <div style="
-        position:relative;
-        width:100%;
-        max-width:960px;
-        border-radius:20px;
-        overflow:hidden;
-        box-shadow:0 24px 80px rgba(27,58,92,.14), 0 4px 16px rgba(27,58,92,.07);
-        background:#f5f6f4;
-        border:1px solid rgba(27,58,92,.06);
-      ">
-        <video
-          id="anteile-video"
-          src="anteile.mp4"
-          style="width:100%;display:block;border-radius:20px;"
-          preload="auto"
-          playsinline
-          muted
-        ></video>
+    <!-- Main: Donut + Info -->
+    <div class="afu d2" style="flex:1;display:flex;gap:60px;align-items:center;min-height:0">
 
-        <!-- Play/Pause overlay -->
-        <div id="anteile-controls" style="
-          position:absolute;bottom:16px;right:20px;
-          display:flex;gap:10px;align-items:center;
-          opacity:0;transition:opacity .25s;
-        ">
-          <button onclick="antReplay()" style="
-            width:36px;height:36px;border-radius:50%;
-            background:rgba(27,58,92,.75);border:none;cursor:pointer;
-            display:flex;align-items:center;justify-content:center;
-            backdrop-filter:blur(6px);
-          ">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.37"/>
-            </svg>
-          </button>
-          <button id="anteile-playbtn" onclick="antToggle()" style="
-            width:36px;height:36px;border-radius:50%;
-            background:rgba(27,58,92,.75);border:none;cursor:pointer;
-            display:flex;align-items:center;justify-content:center;
-            backdrop-filter:blur(6px);
-          ">
-            <svg id="ant-icon-pause" width="16" height="16" viewBox="0 0 24 24" fill="#fff"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-            <svg id="ant-icon-play" width="16" height="16" viewBox="0 0 24 24" fill="#fff" style="display:none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          </button>
+      <!-- Donut -->
+      <div style="flex-shrink:0;position:relative;width:280px;height:280px">
+        <svg width="280" height="280" viewBox="0 0 280 280" style="transform:rotate(-90deg);display:block">
+          <circle cx="140" cy="140" r="104" fill="none" stroke="#E8EAE6" stroke-width="34"/>
+          <!-- TM (gold) -->
+          <circle id="a6-tm" cx="140" cy="140" r="104" fill="none" stroke="#C9A84C" stroke-width="34"
+            stroke-dasharray="0 653.5" stroke-dashoffset="0"
+            style="transition:stroke-dasharray .95s cubic-bezier(.4,0,.2,1),stroke-dashoffset .95s cubic-bezier(.4,0,.2,1);filter:drop-shadow(0 0 6px rgba(201,168,76,.25))"/>
+          <!-- GF (blue) -->
+          <circle id="a6-gf" cx="140" cy="140" r="104" fill="none" stroke="#4A8DB8" stroke-width="34"
+            stroke-dasharray="0 653.5" stroke-dashoffset="0"
+            style="transition:stroke-dasharray .95s cubic-bezier(.4,0,.2,1),stroke-dashoffset .95s cubic-bezier(.4,0,.2,1);filter:drop-shadow(0 0 6px rgba(74,141,184,.25))"/>
+          <!-- ET (navy) -->
+          <circle id="a6-et" cx="140" cy="140" r="104" fill="none" stroke="#1B3A5C" stroke-width="34"
+            stroke-dasharray="653.5 653.5" stroke-dashoffset="0"
+            style="transition:stroke-dasharray .95s cubic-bezier(.4,0,.2,1),stroke-dashoffset .95s cubic-bezier(.4,0,.2,1)"/>
+        </svg>
+        <!-- Center -->
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+          <div id="a6-cpct" style="font-size:42px;font-weight:900;color:#1B3A5C;letter-spacing:-2px;line-height:1;font-family:-apple-system,sans-serif;transition:all .4s">100%</div>
+          <div style="font-size:10px;font-weight:700;color:#8B919A;letter-spacing:.1em;text-transform:uppercase;margin-top:3px;font-family:-apple-system,sans-serif">EterniTeam</div>
+          <div id="a6-cpcts2" style="display:flex;gap:8px;margin-top:7px;opacity:0;transition:opacity .6s .3s">
+            <span id="a6-cgf" style="font-size:12px;font-weight:700;color:#4A8DB8;font-family:-apple-system,sans-serif">0%</span>
+            <span style="font-size:11px;color:#CDD">·</span>
+            <span id="a6-ctm" style="font-size:12px;font-weight:700;color:#C9A84C;font-family:-apple-system,sans-serif">0%</span>
+          </div>
         </div>
+        <!-- Glow ring on active -->
+        <div style="position:absolute;inset:-8px;border-radius:50%;border:1px solid rgba(27,58,92,.06);pointer-events:none"></div>
+      </div>
+
+      <!-- Right info panel -->
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:11px">
+          <div id="a6-badge" style="padding:4px 14px;border-radius:50px;background:#1B3A5C;color:#fff;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-family:-apple-system,sans-serif;transition:background .6s">Jahr 0 · Kauf</div>
+          <div id="a6-sublabel" style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#7A9E7E;font-family:-apple-system,sans-serif;transition:opacity .4s">Transaktion</div>
+        </div>
+        <div id="a6-title" style="font-size:24px;font-weight:800;color:#1B3A5C;letter-spacing:-.5px;line-height:1.18;margin-bottom:9px;font-family:-apple-system,sans-serif;transition:opacity .35s,transform .35s">100% Eigentum<br>bei EterniTeam</div>
+        <div id="a6-desc" style="font-size:13.5px;color:#8B919A;line-height:1.7;margin-bottom:22px;max-width:380px;font-family:-apple-system,sans-serif;transition:opacity .35s,transform .35s">EterniTeam erwirbt <strong style="color:#1B3A5C">100%</strong> der Anteile. Sofortige Transaktionssicherheit für den Verkäufer.</div>
+
+        <!-- Bar rows -->
+        <div style="display:flex;flex-direction:column;gap:9px;max-width:400px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="width:9px;height:9px;border-radius:2px;background:#1B3A5C;flex-shrink:0"></div>
+            <div style="width:110px;font-size:12px;font-weight:600;color:#1B3A5C;font-family:-apple-system,sans-serif;white-space:nowrap">EterniTeam</div>
+            <div style="flex:1;height:5px;background:#E8EAE6;border-radius:3px;overflow:hidden">
+              <div id="a6-bar-et" style="height:100%;width:100%;background:linear-gradient(90deg,#1B3A5C,#2E5A8C);border-radius:3px;transition:width .95s cubic-bezier(.4,0,.2,1)"></div>
+            </div>
+            <div id="a6-lbl-et" style="width:36px;text-align:right;font-size:13px;font-weight:700;color:#1B3A5C;font-family:-apple-system,sans-serif">100%</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="width:9px;height:9px;border-radius:2px;background:#4A8DB8;flex-shrink:0"></div>
+            <div style="width:110px;font-size:12px;font-weight:600;color:#4A8DB8;font-family:-apple-system,sans-serif;white-space:nowrap">Geschäftsführung</div>
+            <div style="flex:1;height:5px;background:#E8EAE6;border-radius:3px;overflow:hidden">
+              <div id="a6-bar-gf" style="height:100%;width:0%;background:linear-gradient(90deg,#4A8DB8,#5AADDE);border-radius:3px;transition:width .95s cubic-bezier(.4,0,.2,1)"></div>
+            </div>
+            <div id="a6-lbl-gf" style="width:36px;text-align:right;font-size:13px;font-weight:700;color:#4A8DB8;font-family:-apple-system,sans-serif">0%</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="width:9px;height:9px;border-radius:2px;background:#C9A84C;flex-shrink:0"></div>
+            <div style="width:110px;font-size:12px;font-weight:600;color:#C9A84C;font-family:-apple-system,sans-serif;white-space:nowrap">Team (MA)</div>
+            <div style="flex:1;height:5px;background:#E8EAE6;border-radius:3px;overflow:hidden">
+              <div id="a6-bar-tm" style="height:100%;width:0%;background:linear-gradient(90deg,#C9A84C,#E8C46A);border-radius:3px;transition:width .95s cubic-bezier(.4,0,.2,1)"></div>
+            </div>
+            <div id="a6-lbl-tm" style="width:36px;text-align:right;font-size:13px;font-weight:700;color:#C9A84C;font-family:-apple-system,sans-serif">0%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="afu d3" style="display:flex;justify-content:center;gap:40px;padding-top:18px;border-top:1px solid rgba(27,58,92,.07);margin-top:4px">
+      <!-- mini-donut 0: 100/0/0 -->
+      <div class="a6-tl" id="a6t0" onclick="antGoTo(0)" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;opacity:.45;transition:opacity .35s,transform .35s">
+        <svg width="48" height="48" viewBox="0 0 48 48" style="transform:rotate(-90deg)" class="a6-mini-svg">
+          <circle cx="24" cy="24" r="18" fill="none" stroke="#E8EAE6" stroke-width="6"/>
+          <circle cx="24" cy="24" r="18" fill="none" stroke="#1B3A5C" stroke-width="6" stroke-dasharray="113.1 113.1"/>
+        </svg>
+        <div style="font-size:10px;font-weight:700;color:#1B3A5C;letter-spacing:.06em;font-family:-apple-system,sans-serif;text-align:center;line-height:1.3">Jahr 0<br><span style="font-weight:400;color:#8B919A;font-size:9px">Kauf</span></div>
+      </div>
+      <!-- mini-donut 1: 80/10/10 -->
+      <div class="a6-tl" id="a6t1" onclick="antGoTo(1)" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;opacity:.45;transition:opacity .35s,transform .35s">
+        <svg width="48" height="48" viewBox="0 0 48 48" style="transform:rotate(-90deg)">
+          <circle cx="24" cy="24" r="18" fill="none" stroke="#E8EAE6" stroke-width="6"/>
+          <circle cx="24" cy="24" r="18" fill="none" stroke="#C9A84C" stroke-width="6" stroke-dasharray="11.3 113.1" stroke-dashoffset="-101.8"/>
+          <circle cx="24" cy="24" r="18" fill="none" stroke="#4A8DB8" stroke-width="6" stroke-dasharray="11.3 113.1" stroke-dashoffset="-90.5"/>
+          <circle cx="24" cy="24" r="18" fill="none" stroke="#1B3A5C" stroke-width="6" stroke-dasharray="90.5 113.1"/>
+        </svg>
+        <div style="font-size:10px;font-weight:700;color:#1B3A5C;letter-spacing:.06em;font-family:-apple-system,sans-serif;text-align:center;line-height:1.3">Jahr 0<br><span style="font-weight:400;color:#8B919A;font-size:9px">Sofort</span></div>
+      </div>
+      <!-- mini-donut 2: 66/17/17 -->
+      <div class="a6-tl" id="a6t2" onclick="antGoTo(2)" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;opacity:.45;transition:opacity .35s,transform .35s">
+        <svg width="48" height="48" viewBox="0 0 48 48" style="transform:rotate(-90deg)">
+          <circle cx="24" cy="24" r="18" fill="none" stroke="#E8EAE6" stroke-width="6"/>
+          <circle cx="24" cy="24" r="18" fill="none" stroke="#C9A84C" stroke-width="6" stroke-dasharray="19.2 113.1" stroke-dashoffset="-93.9"/>
+          <circle cx="24" cy="24" r="18" fill="none" stroke="#4A8DB8" stroke-width="6" stroke-dasharray="19.2 113.1" stroke-dashoffset="-74.6"/>
+          <circle cx="24" cy="24" r="18" fill="none" stroke="#1B3A5C" stroke-width="6" stroke-dasharray="74.6 113.1"/>
+        </svg>
+        <div style="font-size:10px;font-weight:700;color:#1B3A5C;letter-spacing:.06em;font-family:-apple-system,sans-serif;text-align:center;line-height:1.3">Jahr 5<br><span style="font-weight:400;color:#8B919A;font-size:9px">Wachstum</span></div>
+      </div>
+      <!-- mini-donut 3: 20/40/40 -->
+      <div class="a6-tl" id="a6t3" onclick="antGoTo(3)" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;opacity:.45;transition:opacity .35s,transform .35s">
+        <svg width="48" height="48" viewBox="0 0 48 48" style="transform:rotate(-90deg)">
+          <circle cx="24" cy="24" r="18" fill="none" stroke="#E8EAE6" stroke-width="6"/>
+          <circle cx="24" cy="24" r="18" fill="none" stroke="#C9A84C" stroke-width="6" stroke-dasharray="45.2 113.1" stroke-dashoffset="-45.2"/>
+          <circle cx="24" cy="24" r="18" fill="none" stroke="#4A8DB8" stroke-width="6" stroke-dasharray="45.2 113.1" stroke-dashoffset="-22.6"/>
+          <circle cx="24" cy="24" r="18" fill="none" stroke="#1B3A5C" stroke-width="6" stroke-dasharray="22.6 113.1"/>
+        </svg>
+        <div style="font-size:10px;font-weight:700;color:#1B3A5C;letter-spacing:.06em;font-family:-apple-system,sans-serif;text-align:center;line-height:1.3">Jahr 15+<br><span style="font-weight:400;color:#8B919A;font-size:9px">Mehrheit</span></div>
       </div>
     </div>
 
@@ -1533,44 +1598,122 @@ document.addEventListener('keydown', e => {
   if(e.key === 'ArrowLeft')  { e.preventDefault(); goTo(cur - 1); }
 });
 
-// ─── ANTEILE VIDEO PLAYER (Slide 6) ───
-function antAutoPlay() {
-  const v = document.getElementById('anteile-video');
-  const ctrl = document.getElementById('anteile-controls');
-  if(!v) return;
-  v.currentTime = 0;
-  v.play().catch(() => {});
-  // Show controls on hover
-  const wrap = v.parentElement;
-  wrap.addEventListener('mouseenter', () => { if(ctrl) ctrl.style.opacity = '1'; });
-  wrap.addEventListener('mouseleave', () => { if(ctrl) ctrl.style.opacity = '0'; });
-  v.addEventListener('ended', () => {
-    document.getElementById('ant-icon-pause').style.display = 'none';
-    document.getElementById('ant-icon-play').style.display = '';
+// ─── BETEILIGUNGSMODELL ANIMATION (Slide 6) ───
+const A6_CIRC = 2 * Math.PI * 104; // ≈ 653.5
+const a6stages = [
+  {
+    et:100, gf:0,  tm:0,
+    badge:'Jahr 0 · Kauf', sub:'Transaktion',
+    title:'100% Eigentum<br>bei EterniTeam',
+    desc:'EterniTeam erwirbt <strong style="color:#1B3A5C">100%</strong> der Anteile. Sofortige Transaktionssicherheit für den Verkäufer.'
+  },
+  {
+    et:80, gf:10, tm:10,
+    badge:'Jahr 0 · Sofort', sub:'Tag 1',
+    title:'Sofortbeteiligung<br>für Führung & Team',
+    desc:'Neue GF und Team erhalten <strong style="color:#1B3A5C">je 10%</strong> ab Tag 1 — ohne eigenes Kapital. EterniTeam hält 80%.'
+  },
+  {
+    et:66, gf:17, tm:17,
+    badge:'Jahr 5', sub:'Wachstum',
+    title:'Wachsende<br>Beteiligung',
+    desc:'Nach 5 Jahren hält das Führungsteam bereits <strong style="color:#1B3A5C">34%</strong>. EterniTeam behält die Mehrheit.'
+  },
+  {
+    et:20, gf:40, tm:40,
+    badge:'Jahr 15+', sub:'Mehrheit',
+    title:'80% Eigentum<br>beim Team',
+    desc:'Das Führungsteam hält die <strong style="color:#1B3A5C">Mehrheit von 80%</strong>. Das Lebenswerk ist vollständig übergeben.'
+  }
+];
+let a6cur = 0, a6timer = null;
+
+function antGoTo(idx) {
+  a6cur = idx;
+  const s = a6stages[idx];
+  const C = A6_CIRC;
+  const etA = C * s.et / 100;
+  const gfA = C * s.gf / 100;
+  const tmA = C * s.tm / 100;
+
+  // Update donut segments
+  const etEl = document.getElementById('a6-et');
+  const gfEl = document.getElementById('a6-gf');
+  const tmEl = document.getElementById('a6-tm');
+  if(etEl) { etEl.style.strokeDasharray = `${etA} ${C}`; etEl.style.strokeDashoffset = 0; }
+  if(gfEl) { gfEl.style.strokeDasharray = `${gfA} ${C}`; gfEl.style.strokeDashoffset = -etA; }
+  if(tmEl) { tmEl.style.strokeDasharray = `${tmA} ${C}`; tmEl.style.strokeDashoffset = -(etA + gfA); }
+
+  // Center %
+  const cpct = document.getElementById('a6-cpct');
+  if(cpct) antCountUp(cpct, s.et, '%');
+  const cgf = document.getElementById('a6-cgf');
+  const ctm = document.getElementById('a6-ctm');
+  if(cgf) antCountUp(cgf, s.gf, '%');
+  if(ctm) antCountUp(ctm, s.tm, '%');
+  const subs = document.getElementById('a6-cpcts2');
+  if(subs) subs.style.opacity = s.gf > 0 ? '1' : '0';
+
+  // Right panel — fade out/in
+  ['a6-title','a6-desc','a6-badge','a6-sublabel'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) { el.style.opacity = '0'; el.style.transform = 'translateY(6px)'; }
   });
-  document.getElementById('ant-icon-pause').style.display = '';
-  document.getElementById('ant-icon-play').style.display = 'none';
-}
-function antToggle() {
-  const v = document.getElementById('anteile-video');
-  if(!v) return;
-  if(v.paused) {
-    v.play();
-    document.getElementById('ant-icon-pause').style.display = '';
-    document.getElementById('ant-icon-play').style.display = 'none';
-  } else {
-    v.pause();
-    document.getElementById('ant-icon-pause').style.display = 'none';
-    document.getElementById('ant-icon-play').style.display = '';
+  setTimeout(() => {
+    const t = document.getElementById('a6-title');
+    const d = document.getElementById('a6-desc');
+    const b = document.getElementById('a6-badge');
+    const sl = document.getElementById('a6-sublabel');
+    if(t) { t.innerHTML = s.title; t.style.opacity='1'; t.style.transform='translateY(0)'; }
+    if(d) { d.innerHTML = s.desc; d.style.opacity='1'; d.style.transform='translateY(0)'; }
+    if(b) { b.textContent = s.badge; b.style.opacity='1'; b.style.transform='translateY(0)'; }
+    if(sl) { sl.textContent = s.sub; sl.style.opacity='1'; sl.style.transform='translateY(0)'; }
+  }, 180);
+
+  // Bars
+  const barEt = document.getElementById('a6-bar-et');
+  const barGf = document.getElementById('a6-bar-gf');
+  const barTm = document.getElementById('a6-bar-tm');
+  const lblEt = document.getElementById('a6-lbl-et');
+  const lblGf = document.getElementById('a6-lbl-gf');
+  const lblTm = document.getElementById('a6-lbl-tm');
+  if(barEt) barEt.style.width = s.et + '%';
+  if(barGf) barGf.style.width = s.gf + '%';
+  if(barTm) barTm.style.width = s.tm + '%';
+  if(lblEt) antCountUp(lblEt, s.et, '%');
+  if(lblGf) antCountUp(lblGf, s.gf, '%');
+  if(lblTm) antCountUp(lblTm, s.tm, '%');
+
+  // Timeline highlight
+  for(let i = 0; i < 4; i++) {
+    const tl = document.getElementById('a6t' + i);
+    if(tl) {
+      tl.style.opacity = i === idx ? '1' : '.4';
+      tl.style.transform = i === idx ? 'scale(1.08)' : 'scale(1)';
+    }
   }
 }
-function antReplay() {
-  const v = document.getElementById('anteile-video');
-  if(!v) return;
-  v.currentTime = 0;
-  v.play();
-  document.getElementById('ant-icon-pause').style.display = '';
-  document.getElementById('ant-icon-play').style.display = 'none';
+
+function antCountUp(el, target, suffix) {
+  const start = parseInt(el.textContent) || 0;
+  const steps = 20, dur = 500;
+  let i = 0;
+  const t = setInterval(() => {
+    i++;
+    el.textContent = Math.round(start + (target - start) * (i / steps)) + suffix;
+    if(i >= steps) { el.textContent = target + suffix; clearInterval(t); }
+  }, dur / steps);
+}
+
+function antAutoPlay() {
+  if(a6timer) clearInterval(a6timer);
+  antGoTo(0);
+  let step = 0;
+  a6timer = setInterval(() => {
+    step++;
+    if(step >= 4) { clearInterval(a6timer); a6timer = null; return; }
+    antGoTo(step);
+  }, 1800);
 }
 
 
