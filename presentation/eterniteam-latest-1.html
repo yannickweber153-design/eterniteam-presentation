@@ -785,6 +785,37 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
 .a6-stab:hover { transform: translateY(-1px); }
 .a6-stab-on { transform: translateY(-1px); }
 
+/* ── s3 Win·Win·Win: line draw + node breath + pulse fade ── */
+.ww-line {
+  stroke-dasharray: var(--ww-len, 800);
+  stroke-dashoffset: var(--ww-len, 800);
+  transition: stroke-dashoffset 1.4s var(--ease-morph), opacity 0.8s var(--ease-out);
+}
+.slide.active#s3 .ww-line.drawn {
+  stroke-dashoffset: 0;
+  opacity: 0.55;
+}
+#wwPulses {
+  transition: opacity 0.8s var(--ease-out);
+}
+@keyframes wwNodeBreath {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.015); }
+}
+.slide.active#s3 .ww-card {
+  animation: wwNodeBreath 4.8s var(--ease-morph) infinite;
+}
+.slide.active#s3 #wwN1 .ww-card { animation-delay: -1.6s; }
+.slide.active#s3 #wwN2 .ww-card { animation-delay: -3.2s; }
+.ww-card-halo {
+  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+  opacity: 0;
+}
+.slide.active#s3 .ww-card-halo {
+  opacity: 0.18;
+  animation: etConfidenceGlow 4.2s var(--ease-morph) infinite;
+}
+
 /* ── s8 Referenzen: map pin pulse ── */
 .ref-dot .ref-dot-inner {
   transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
@@ -1074,6 +1105,15 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
       <!-- Triangle -->
       <div class="ww-system" id="wwTriangle">
         <svg class="ww-svg" viewBox="0 0 860 420" fill="none">
+          <defs>
+            <filter id="wwPulseGlow" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="3.5" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <radialGradient id="wwPulseNavy"><stop offset="0%" stop-color="#1B3A5C" stop-opacity="1"/><stop offset="100%" stop-color="#1B3A5C" stop-opacity="0"/></radialGradient>
+            <radialGradient id="wwPulseSage"><stop offset="0%" stop-color="#7A9E7E" stop-opacity="1"/><stop offset="100%" stop-color="#7A9E7E" stop-opacity="0"/></radialGradient>
+            <radialGradient id="wwPulseGold"><stop offset="0%" stop-color="#C8A662" stop-opacity="1"/><stop offset="100%" stop-color="#C8A662" stop-opacity="0"/></radialGradient>
+          </defs>
           <!-- Glow paths (background) -->
           <path d="M 430 78 Q 620 195 622 302" stroke="var(--navy)" stroke-width="18" stroke-linecap="round" opacity=".04"/>
           <path d="M 430 78 Q 240 195 238 302" stroke="var(--sage)" stroke-width="18" stroke-linecap="round" opacity=".04"/>
@@ -1092,6 +1132,15 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
           <circle id="wwA1" cx="622" cy="302" r="4" fill="var(--navy)" opacity="0"/>
           <circle id="wwA2" cx="238" cy="302" r="4" fill="var(--sage)" opacity="0"/>
           <circle id="wwA3l" cx="572" cy="360" r="4" fill="var(--gold)" opacity="0"/>
+          <!-- Travelling energy pulses (positioned via JS getPointAtLength) -->
+          <g id="wwPulses" filter="url(#wwPulseGlow)" opacity="0">
+            <circle class="ww-pulse" data-path="wwL1" data-offset="0"    r="5" fill="var(--navy)"/>
+            <circle class="ww-pulse" data-path="wwL1" data-offset="0.5"  r="4" fill="var(--navy)"/>
+            <circle class="ww-pulse" data-path="wwL2" data-offset="0.15" r="5" fill="var(--sage)"/>
+            <circle class="ww-pulse" data-path="wwL2" data-offset="0.65" r="4" fill="var(--sage)"/>
+            <circle class="ww-pulse" data-path="wwL3" data-offset="0.3"  r="5" fill="var(--gold)"/>
+            <circle class="ww-pulse" data-path="wwL3" data-offset="0.8"  r="4" fill="var(--gold)"/>
+          </g>
         </svg>
 
         <!-- Unternehmer (top center) -->
@@ -2637,6 +2686,13 @@ if(cur === 3) { setTimeout(wwAnimate, 400); }
         }, 200);
       }
 
+      // s3 Win·Win·Win energy flow
+      if (idx === 3) {
+        setTimeout(function() { startWwEnergy(); }, 450);
+      } else {
+        stopWwEnergy();
+      }
+
       // s1 big stat countup
       if (idx === 1) {
         setTimeout(function() {
@@ -2650,6 +2706,85 @@ if(cur === 3) { setTimeout(wwAnimate, 400); }
         }, 1200);
       }
     };
+  }
+
+  // ── s3 Win·Win·Win travelling energy pulses ─────────────────
+  var wwRaf = null, wwStart = 0;
+  function startWwEnergy() {
+    var paths = {
+      wwL1: document.getElementById('wwL1'),
+      wwL2: document.getElementById('wwL2'),
+      wwL3: document.getElementById('wwL3')
+    };
+    if (!paths.wwL1) return;
+
+    // Set dash length vars + trigger draw
+    Object.keys(paths).forEach(function(k) {
+      var p = paths[k];
+      if (!p) return;
+      var L = p.getTotalLength();
+      p.style.setProperty('--ww-len', L);
+      p.classList.remove('drawn');
+      // Force reflow, then add drawn class
+      void p.getBoundingClientRect();
+      p.classList.add('drawn');
+    });
+
+    // Reveal endpoint arrow dots staggered
+    ['wwA2', 'wwA1', 'wwA3l'].forEach(function(id, i) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.style.transition = 'opacity 0.5s var(--ease-out)';
+      setTimeout(function() { el.style.opacity = '0.9'; }, 900 + i * 180);
+    });
+
+    // Fade in pulse group, then start rAF
+    var g = document.getElementById('wwPulses');
+    if (g) {
+      setTimeout(function() { g.setAttribute('opacity', '1'); }, 1200);
+    }
+
+    stopWwEnergy();
+    wwStart = performance.now();
+    var pulses = Array.prototype.slice.call(document.querySelectorAll('#wwPulses .ww-pulse'));
+    var lengths = { wwL1: paths.wwL1.getTotalLength(), wwL2: paths.wwL2.getTotalLength(), wwL3: paths.wwL3.getTotalLength() };
+    var period = 3600; // ms per full traversal
+
+    function frame(now) {
+      var t = (now - wwStart) / period;
+      pulses.forEach(function(dot) {
+        var key = dot.getAttribute('data-path');
+        var off = parseFloat(dot.getAttribute('data-offset')) || 0;
+        var L = lengths[key];
+        var p = paths[key];
+        if (!p || !L) return;
+        var u = ((t + off) % 1 + 1) % 1;
+        // Ease: accelerate into, decelerate out (subtle breathing feel)
+        var eased = u < 0.5 ? 2*u*u : 1 - Math.pow(-2*u+2, 2)/2;
+        var pt = p.getPointAtLength(eased * L);
+        dot.setAttribute('cx', pt.x);
+        dot.setAttribute('cy', pt.y);
+        // Fade pulses at path edges so they "emerge" and "arrive" softly
+        var edge = Math.min(u, 1 - u) * 2; // 0 at edges, 1 at middle
+        var alpha = Math.min(1, edge * 2.2);
+        dot.setAttribute('opacity', alpha.toFixed(3));
+      });
+      wwRaf = requestAnimationFrame(frame);
+    }
+    wwRaf = requestAnimationFrame(frame);
+  }
+  function stopWwEnergy() {
+    if (wwRaf) { cancelAnimationFrame(wwRaf); wwRaf = null; }
+    var g = document.getElementById('wwPulses');
+    if (g) g.setAttribute('opacity', '0');
+    ['wwL1','wwL2','wwL3'].forEach(function(id){
+      var p = document.getElementById(id);
+      if (p) p.classList.remove('drawn');
+    });
+    ['wwA1','wwA2','wwA3l'].forEach(function(id){
+      var el = document.getElementById(id);
+      if (el) el.style.opacity = '0';
+    });
   }
 
   // ── Initial reveal for active slide on load ──────────────────
