@@ -57,6 +57,14 @@ body::before{
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes scaleIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
 @keyframes pulseSlow{0%,100%{opacity:.08;transform:scale(1)}50%{opacity:.15;transform:scale(1.06)}}
+@keyframes floatA{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(18px,-12px) scale(1.04)}66%{transform:translate(-10px,16px) scale(.97)}}
+@keyframes floatB{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-14px,10px) scale(1.03)}66%{transform:translate(12px,-18px) scale(.98)}}
+@keyframes floatC{0%,100%{transform:translate(0,0)}50%{transform:translate(8px,12px)}}
+.orb-a{position:absolute;border-radius:50%;pointer-events:none;animation:floatA 14s ease-in-out infinite}
+.orb-b{position:absolute;border-radius:50%;pointer-events:none;animation:floatB 18s ease-in-out infinite}
+.orb-c{position:absolute;border-radius:50%;pointer-events:none;animation:floatC 22s ease-in-out infinite}
+.slide-accent-top{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 0%,rgba(27,58,92,.18) 20%,rgba(122,158,126,.22) 60%,transparent 100%);pointer-events:none;z-index:1}
+.corner-deco{position:absolute;pointer-events:none;opacity:.045}
 @keyframes pulse-ring{0%{transform:scale(1);opacity:.6}100%{transform:scale(2.4);opacity:0}}
 @keyframes pulse-cta{0%,100%{box-shadow:0 0 0 0 rgba(27,58,92,.4)}50%{box-shadow:0 0 0 10px rgba(27,58,92,0)}}
 @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
@@ -739,6 +747,11 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
   </div>
 </div>
 <div class="slide" id="s2">
+  <div class="slide-accent-top"></div>
+  <div class="orb-a" style="width:520px;height:520px;background:radial-gradient(circle,rgba(27,58,92,.055) 0%,transparent 65%);top:-160px;right:-80px"></div>
+  <div class="orb-b" style="width:360px;height:360px;background:radial-gradient(circle,rgba(122,158,126,.05) 0%,transparent 65%);bottom:-100px;left:-60px;animation-delay:-5s"></div>
+  <div class="orb-c" style="width:240px;height:240px;background:radial-gradient(circle,rgba(59,125,216,.04) 0%,transparent 65%);top:40%;right:15%;animation-delay:-9s"></div>
+  <svg class="corner-deco" style="bottom:60px;right:50px;width:180px;height:180px" viewBox="0 0 180 180" fill="none"><circle cx="160" cy="160" r="70" stroke="#1B3A5C" stroke-width="1"/><circle cx="160" cy="160" r="110" stroke="#7A9E7E" stroke-width="0.7"/><circle cx="160" cy="160" r="150" stroke="#1B3A5C" stroke-width="0.5"/></svg>
   <div class="grid-bg absolute inset-0"></div>
   <div class="slide-inner">
     <div style="margin-bottom:28px">
@@ -783,6 +796,11 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
      SLIDE 3 · WIN-WIN-WIN
 ═══════════════════════════════════════════════ -->
 <div class="slide" id="s3">
+  <div class="slide-accent-top"></div>
+  <div class="orb-a" style="width:480px;height:480px;background:radial-gradient(circle,rgba(122,158,126,.055) 0%,transparent 65%);top:-120px;right:-60px;animation-delay:-3s"></div>
+  <div class="orb-b" style="width:400px;height:400px;background:radial-gradient(circle,rgba(27,58,92,.05) 0%,transparent 65%);bottom:-80px;left:-80px;animation-delay:-7s"></div>
+  <div class="orb-c" style="width:260px;height:260px;background:radial-gradient(circle,rgba(122,158,126,.04) 0%,transparent 65%);top:35%;left:38%;animation-delay:-12s"></div>
+  <svg class="corner-deco" style="top:50px;right:48px;width:160px;height:160px" viewBox="0 0 160 160" fill="none"><path d="M 0 160 Q 80 80 160 0" stroke="#1B3A5C" stroke-width="1" fill="none"/><path d="M 0 120 Q 60 60 120 0" stroke="#7A9E7E" stroke-width="0.7" fill="none"/><path d="M 0 80 Q 40 40 80 0" stroke="#1B3A5C" stroke-width="0.5" fill="none"/></svg>
   <div class="grid-bg" style="position:absolute;inset:0;opacity:.5"></div>
   <div class="slide-inner" style="align-items:stretch;padding-bottom:100px">
 
@@ -896,6 +914,11 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
      SLIDE 4 · VERGLEICH
 ═══════════════════════════════════════════════ -->
 <div class="slide" id="s4">
+  <div class="slide-accent-top"></div>
+  <div class="orb-a" style="width:500px;height:500px;background:radial-gradient(circle,rgba(27,58,92,.055) 0%,transparent 65%);top:-140px;left:-60px;animation-delay:-4s"></div>
+  <div class="orb-b" style="width:380px;height:380px;background:radial-gradient(circle,rgba(122,158,126,.05) 0%,transparent 65%);bottom:-100px;right:-40px;animation-delay:-8s"></div>
+  <div class="orb-c" style="width:220px;height:220px;background:radial-gradient(circle,rgba(59,125,216,.04) 0%,transparent 65%);top:30%;right:28%;animation-delay:-6s"></div>
+  <svg class="corner-deco" style="bottom:50px;left:40px;width:200px;height:200px" viewBox="0 0 200 200" fill="none"><circle cx="0" cy="200" r="80" stroke="#7A9E7E" stroke-width="1"/><circle cx="0" cy="200" r="130" stroke="#1B3A5C" stroke-width="0.7"/><circle cx="0" cy="200" r="180" stroke="#7A9E7E" stroke-width="0.5"/></svg>
   <div class="grid-bg absolute inset-0"></div>
   <div class="slide-inner">
     <div style="margin-bottom:24px">
@@ -958,6 +981,11 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
      SLIDE 5 · INVESTITIONSKRITERIEN
 ═══════════════════════════════════════════════ -->
 <div class="slide" id="s5">
+  <div class="slide-accent-top"></div>
+  <div class="orb-a" style="width:540px;height:540px;background:radial-gradient(circle,rgba(122,158,126,.05) 0%,transparent 65%);top:-160px;right:-100px;animation-delay:-2s"></div>
+  <div class="orb-b" style="width:360px;height:360px;background:radial-gradient(circle,rgba(27,58,92,.055) 0%,transparent 65%);bottom:-80px;left:-50px;animation-delay:-10s"></div>
+  <div class="orb-c" style="width:280px;height:280px;background:radial-gradient(circle,rgba(122,158,126,.04) 0%,transparent 65%);top:42%;left:42%;animation-delay:-14s"></div>
+  <svg class="corner-deco" style="top:44px;left:44px;width:150px;height:150px" viewBox="0 0 150 150" fill="none"><path d="M 150 0 L 0 0 L 0 150" stroke="#1B3A5C" stroke-width="1" fill="none" stroke-dasharray="6 4"/><path d="M 120 0 L 0 0 L 0 120" stroke="#7A9E7E" stroke-width="0.7" fill="none" stroke-dasharray="6 4"/><path d="M 90 0 L 0 0 L 0 90" stroke="#1B3A5C" stroke-width="0.5" fill="none" stroke-dasharray="6 4"/></svg>
   <div class="grid-bg absolute inset-0"></div>
   <div class="slide-inner">
     <div style="margin-bottom:28px">
@@ -1020,6 +1048,11 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
      SLIDE 6 · BETEILIGUNGSMODELL
 ═══════════════════════════════════════════════ -->
 <div class="slide" id="s6">
+  <div class="slide-accent-top"></div>
+  <div class="orb-a" style="width:460px;height:460px;background:radial-gradient(circle,rgba(27,58,92,.055) 0%,transparent 65%);top:-120px;right:-70px;animation-delay:-6s"></div>
+  <div class="orb-b" style="width:420px;height:420px;background:radial-gradient(circle,rgba(122,158,126,.05) 0%,transparent 65%);bottom:-120px;left:-80px;animation-delay:-11s"></div>
+  <div class="orb-c" style="width:200px;height:200px;background:radial-gradient(circle,rgba(59,125,216,.045) 0%,transparent 65%);top:38%;right:22%;animation-delay:-4s"></div>
+  <svg class="corner-deco" style="bottom:48px;right:52px;width:190px;height:190px" viewBox="0 0 190 190" fill="none"><path d="M 190 190 L 190 0" stroke="#1B3A5C" stroke-width="1" fill="none"/><path d="M 150 190 L 190 150" stroke="#7A9E7E" stroke-width="0.7" fill="none"/><path d="M 110 190 L 190 110" stroke="#1B3A5C" stroke-width="0.5" fill="none"/><path d="M 70 190 L 190 70" stroke="#7A9E7E" stroke-width="0.4" fill="none"/><path d="M 30 190 L 190 30" stroke="#1B3A5C" stroke-width="0.3" fill="none"/></svg>
   <div class="grid-bg absolute inset-0"></div>
   <div class="slide-inner" style="padding:36px 72px 80px;display:flex;flex-direction:column">
 
@@ -1189,6 +1222,11 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
      SLIDE 7 · ZUKUNFT
 ═══════════════════════════════════════════════ -->
 <div class="slide" id="s7">
+  <div class="slide-accent-top"></div>
+  <div class="orb-a" style="width:500px;height:500px;background:radial-gradient(circle,rgba(122,158,126,.055) 0%,transparent 65%);top:-140px;left:-80px;animation-delay:-1s"></div>
+  <div class="orb-b" style="width:380px;height:380px;background:radial-gradient(circle,rgba(27,58,92,.05) 0%,transparent 65%);bottom:-100px;right:-60px;animation-delay:-9s"></div>
+  <div class="orb-c" style="width:240px;height:240px;background:radial-gradient(circle,rgba(122,158,126,.04) 0%,transparent 65%);top:45%;right:30%;animation-delay:-7s"></div>
+  <svg class="corner-deco" style="top:46px;right:46px;width:170px;height:170px" viewBox="0 0 170 170" fill="none"><circle cx="85" cy="85" r="60" stroke="#1B3A5C" stroke-width="0.8" stroke-dasharray="4 6"/><circle cx="85" cy="85" r="80" stroke="#7A9E7E" stroke-width="0.6" stroke-dasharray="4 8"/><circle cx="85" cy="85" r="100" stroke="#1B3A5C" stroke-width="0.4" stroke-dasharray="3 9"/></svg>
   <div class="grid-bg absolute inset-0"></div>
   <div class="slide-inner">
     <div style="margin-bottom:24px">
@@ -1245,6 +1283,7 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
      SLIDE 8 · REFERENZEN
 ═══════════════════════════════════════════════ -->
 <div class="slide" id="s8" style="background:var(--cream);overflow:hidden">
+  <div class="slide-accent-top"></div>
   <div class="grid-bg absolute inset-0" style="opacity:.3"></div>
   <div class="orb" style="width:500px;height:500px;background:radial-gradient(circle,rgba(27,58,92,.05) 0%,transparent 65%);top:-80px;left:-60px"></div>
   <svg id="ref-connectors" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:5;overflow:visible"></svg>
@@ -1412,6 +1451,7 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
      SLIDE 9 · TEAM
 ═══════════════════════════════════════════════ -->
 <div class="slide" id="s9">
+  <div class="slide-accent-top"></div>
   <div class="grid-bg absolute inset-0"></div>
   <div class="orb" style="width:500px;height:500px;background:radial-gradient(circle,rgba(27,58,92,.06) 0%,transparent 65%);top:-100px;right:-80px"></div>
 
@@ -1583,6 +1623,7 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
      SLIDE 10 · INVESTOREN
 ═══════════════════════════════════════════════ -->
 <div class="slide" id="s10">
+  <div class="slide-accent-top"></div>
   <div class="grid-bg absolute inset-0"></div>
   <div class="orb" style="width:520px;height:520px;background:radial-gradient(circle,rgba(27,58,92,.07) 0%,transparent 65%);top:-120px;right:-80px"></div>
   <div class="orb" style="width:380px;height:380px;background:radial-gradient(circle,rgba(122,158,126,.06) 0%,transparent 65%);bottom:-80px;left:-60px;animation-delay:3s"></div>
@@ -1744,6 +1785,7 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
      SLIDE 11 · CTA
 ═══════════════════════════════════════════════ -->
 <div class="slide" id="s11">
+  <div class="slide-accent-top"></div>
   <div class="grid-bg absolute inset-0"></div>
   <div class="orb" style="width:600px;height:600px;background:radial-gradient(circle,rgba(122,158,126,.12) 0%,transparent 65%);top:-150px;right:-150px"></div>
   <div class="orb" style="width:400px;height:400px;background:radial-gradient(circle,rgba(27,58,92,.07) 0%,transparent 65%);bottom:-100px;left:-100px;animation-delay:4s"></div>
