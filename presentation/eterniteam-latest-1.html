@@ -2,6 +2,9 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>EterniTeam – Ihr Lebenswerk in guten Händen</title>
 <style>
@@ -20,7 +23,7 @@
   --sh3:0 12px 48px rgba(27,58,92,.18);
 }
 html,body{
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   background:var(--cream);overflow:hidden;width:100%;height:100%;
   color:var(--text);-webkit-font-smoothing:antialiased
 }
@@ -76,13 +79,14 @@ body::before{
 .orb{position:absolute;border-radius:50%;pointer-events:none;animation:pulseSlow 8s ease-in-out infinite}
 
 /* ─── TYPOGRAPHY ─── */
-.label{font-size:10.5px;font-weight:700;letter-spacing:.3em;color:var(--sage);text-transform:uppercase}
-.h1{font-size:clamp(44px,5.8vw,76px);font-weight:800;line-height:1.04;color:var(--navy);letter-spacing:-.025em}
-.h2{font-size:clamp(28px,3.2vw,46px);font-weight:800;line-height:1.1;color:var(--navy);letter-spacing:-.02em}
-.h3{font-size:clamp(20px,2vw,28px);font-weight:700;line-height:1.15;color:var(--navy);letter-spacing:-.015em}
-.h4{font-size:15px;font-weight:700;color:var(--navy);line-height:1.3}
-.body{font-size:15px;color:var(--gray);line-height:1.7}
-.body-sm{font-size:13px;color:var(--gray);line-height:1.65}
+.label{font-size:10px;font-weight:700;letter-spacing:.22em;color:var(--sage);text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.label::before{content:'';display:inline-block;width:18px;height:1.5px;background:var(--sage);flex-shrink:0}
+.h1{font-size:clamp(44px,5.8vw,76px);font-weight:800;line-height:1.04;color:var(--navy);letter-spacing:-.04em}
+.h2{font-size:clamp(26px,2.8vw,40px);font-weight:800;line-height:1.12;color:var(--navy);letter-spacing:-.035em}
+.h3{font-size:clamp(18px,1.8vw,26px);font-weight:700;line-height:1.18;color:var(--navy);letter-spacing:-.025em}
+.h4{font-size:14.5px;font-weight:700;color:var(--navy);line-height:1.3;letter-spacing:-.01em}
+.body{font-size:14.5px;color:var(--gray);line-height:1.72;font-weight:400}
+.body-sm{font-size:12.5px;color:var(--gray);line-height:1.68;font-weight:400}
 .grad-text{background:linear-gradient(135deg,var(--navy),var(--sage));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
 /* ─── CARDS ─── */
@@ -287,7 +291,7 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
 .count-anim{animation:countUp .4s ease both}
 
 /* ── STEP 3: LÖSUNG (s2) – stronger divider ── */
-.how-divider{display:flex;align-items:center;gap:12px;margin-bottom:28px}
+.how-divider{display:flex;align-items:center;gap:12px;margin-bottom:20px}
 .how-divider-line{flex:1;height:1.5px;background:linear-gradient(90deg,var(--sage2),transparent)}
 .how-divider-label{font-size:10px;font-weight:700;letter-spacing:.28em;color:var(--sage);text-transform:uppercase;white-space:nowrap}
 
@@ -627,7 +631,7 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
   <!-- Text content -->
   <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 64px 0 72px;width:56%;z-index:5">
 
-    <div class="label s0-lbl" style="margin-bottom:16px;letter-spacing:.26em;color:rgba(27,58,92,.55);font-size:10.5px;font-weight:700;text-transform:uppercase">
+    <div class="label s0-lbl" style="margin-bottom:10px;letter-spacing:.26em;color:rgba(27,58,92,.55);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.26em;color:rgba(27,58,92,.55);font-size:10.5px;font-weight:700;text-transform:uppercase">
       Unternehmensnachfolge · 2026
     </div>
 
@@ -635,7 +639,7 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
       Was passiert mit<br>Ihrem&nbsp;<span class="s0-grad-text">Lebenswerk?</span>
     </h1>
 
-    <p class="s0-sub" style="max-width:340px;margin-bottom:28px;color:rgba(14,28,50,.82);line-height:1.65;font-size:15.5px;font-weight:400">
+    <p class="s0-sub" style="max-width:340px;margin-bottom:20px;color:rgba(14,28,50,.82);line-height:1.65;font-size:15.5px;font-weight:400">
       Eine Nachfolgelösung, die Ihr Unternehmen erhält.<br>Nicht verändert. Persönlich, verlässlich, langfristig.
     </p>
 
@@ -687,7 +691,7 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
 
   <div class="slide-inner justify-between">
     <div>
-      <div class="label afu" style="color:rgba(181,207,186,.8);margin-bottom:14px">Das Problem</div>
+      <div class="label afu" style="color:rgba(181,207,186,.8);margin-bottom:10px">Das Problem</div>
       <h2 class="h2 afu d2" style="color:#fff;margin-bottom:8px">Millionen Unternehmer stehen<br>vor derselben Frage.</h2>
       <p class="afu d3" style="font-size:15px;color:rgba(255,255,255,.55);max-width:460px;line-height:1.65">
         Jahrzehnte Aufbau. Hunderte Mitarbeiter. Eine Frage ohne Antwort.
@@ -741,8 +745,8 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
 <div class="slide" id="s2">
   <div class="grid-bg absolute inset-0"></div>
   <div class="slide-inner">
-    <div style="margin-bottom:28px">
-      <div class="label afu" style="margin-bottom:12px">Die Lösung</div>
+    <div style="margin-bottom:20px">
+      <div class="label afu" style="margin-bottom:10px">Die Lösung</div>
       <h2 class="h2 afu d2" style="margin-bottom:10px">Ein Verkauf an EterniTeam regelt Ihre<br>Nachfolge – und erhält Ihr Lebenswerk.</h2>
       <p class="body afu d3" style="max-width:560px">Wir sind keine Finanzinvestoren. Wir kaufen nicht, um wieder zu verkaufen. Wir kaufen, um zu erhalten.</p>
     </div>
@@ -789,7 +793,7 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
     <!-- Headline -->
     <div style="margin-bottom:0">
       <div class="label afu" style="margin-bottom:10px">Win · Win · Win</div>
-      <h2 class="h2 afu d2" style="font-size:clamp(22px,2.6vw,34px);line-height:1.13">
+      <h2 class="h2 afu d2">
         Alle Parteien gewinnen – das Unternehmen<br>wechselt in <span class="grad-text">vertraute Hände.</span>
       </h2>
     </div>
@@ -899,7 +903,7 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
   <div class="grid-bg absolute inset-0"></div>
   <div class="slide-inner">
     <div style="margin-bottom:24px">
-      <div class="label afu" style="margin-bottom:12px">Vergleich</div>
+      <div class="label afu" style="margin-bottom:10px">Vergleich</div>
       <h2 class="h2 afu d2">Die beste Lösung für Ihre Nachfolge,<br>Ihr Team und die Zukunft.</h2>
     </div>
 
@@ -960,8 +964,8 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
 <div class="slide" id="s5">
   <div class="grid-bg absolute inset-0"></div>
   <div class="slide-inner">
-    <div style="margin-bottom:28px">
-      <div class="label afu" style="margin-bottom:12px">Investitionskriterien</div>
+    <div style="margin-bottom:20px">
+      <div class="label afu" style="margin-bottom:10px">Investitionskriterien</div>
       <h2 class="h2 afu d2">Wir suchen echte Nachfolgesituationen<br>von erfolgreichen Mittelständlern.</h2>
     </div>
 
@@ -1026,7 +1030,7 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
     <!-- Header row: label + h2 + timeline tabs on right -->
     <div class="afu" style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:20px;gap:20px">
       <div>
-        <div class="label" style="margin-bottom:8px">Beteiligungsmodell</div>
+        <div class="label" style="margin-bottom:10px">Beteiligungsmodell</div>
         <h2 class="h2" style="margin:0">Durch Anteilsrückkäufe wird das Team<br>sukzessive zur <span class="grad-text">Mehrheit.</span></h2>
       </div>
       <!-- Stage tabs top-right -->
@@ -1192,7 +1196,7 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
   <div class="grid-bg absolute inset-0"></div>
   <div class="slide-inner">
     <div style="margin-bottom:24px">
-      <div class="label afu" style="margin-bottom:12px">Die Zukunft des Unternehmens</div>
+      <div class="label afu" style="margin-bottom:10px">Die Zukunft des Unternehmens</div>
       <h2 class="h2 afu d2">Wir unterstützen nachhaltig –<br>kurzfristig, mittelfristig und langfristig.</h2>
     </div>
 
@@ -1255,8 +1259,8 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
     <div style="width:42%;padding:24px 24px 32px 60px;display:flex;flex-direction:column;justify-content:center;flex-shrink:0">
 
       <div style="margin-bottom:14px">
-        <div class="label afu" style="margin-bottom:8px">Referenzen</div>
-        <h2 class="h2 afu d2" style="font-size:clamp(17px,2vw,26px);line-height:1.2">Mehr als Transaktionen:<br>nachhaltige Erfolgsgeschichten.</h2>
+        <div class="label afu" style="margin-bottom:10px">Referenzen</div>
+        <h2 class="h2 afu d2">Mehr als Transaktionen:<br>nachhaltige Erfolgsgeschichten.</h2>
       </div>
 
       <!-- Stats -->
@@ -1417,7 +1421,7 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
 
   <div class="slide-inner" style="padding-bottom:80px">
     <div style="margin-bottom:14px">
-      <div class="label afu" style="margin-bottom:6px">Unser Team</div>
+      <div class="label afu" style="margin-bottom:10px">Unser Team</div>
       <h2 class="h2 afu d2">Erfahren, spezialisiert –<br>und persönlich erreichbar.</h2>
     </div>
 
@@ -1756,7 +1760,7 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
   <div class="slide-inner" style="align-items:center;justify-content:center;text-align:center">
     <div>
       
-      <div class="label afu d2" style="margin-bottom:16px;font-size:11px;letter-spacing:.3em">Der nächste Schritt</div>
+      <div class="label afu d2" style="margin-bottom:10px;font-size:11px;letter-spacing:.3em;font-size:11px;letter-spacing:.3em">Der nächste Schritt</div>
       <h1 class="h1 afu d3" style="margin-bottom:16px">Ihr Lebenswerk verdient<br>die <span class="grad-text">richtige Nachfolge.</span></h1>
       <p class="body afu d5" style="max-width:480px;margin:0 auto 36px">
         Sprechen Sie mit uns. Unverbindlich, vertraulich und auf Augenhöhe.<br>Wir verstehen, was Sie aufgebaut haben.
