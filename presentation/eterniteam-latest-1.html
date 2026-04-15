@@ -785,6 +785,55 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
 .a6-stab:hover { transform: translateY(-1px); }
 .a6-stab-on { transform: translateY(-1px); }
 
+/* ── s5 Kriterien: card cascade + bullet check-beats ── */
+.s5-card {
+  opacity: 0;
+  transform: translateY(18px) scale(.985);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out), box-shadow 0.6s var(--ease-out);
+}
+.slide.active#s5.s5-play .s5-card { opacity: 1; transform: translateY(0) scale(1); }
+.slide.active#s5.s5-play .s5-card[data-s5-card="0"] { transition-delay: 0.15s; }
+.slide.active#s5.s5-play .s5-card[data-s5-card="1"] { transition-delay: 0.30s; }
+.slide.active#s5.s5-play .s5-card[data-s5-card="2"] { transition-delay: 0.45s; }
+/* Bullets cascade within each card */
+#s5 .bullet {
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.45s var(--ease-out), transform 0.45s var(--ease-out);
+}
+#s5 .bullet-dot {
+  transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+}
+.slide.active#s5.s5-play .bullet { opacity: 1; transform: translateX(0); }
+/* per-card bullet stagger using nth-child for stable ordering */
+.slide.active#s5.s5-play .s5-card[data-s5-card="0"] .bullet:nth-child(1) { transition-delay: 0.55s; }
+.slide.active#s5.s5-play .s5-card[data-s5-card="0"] .bullet:nth-child(2) { transition-delay: 0.68s; }
+.slide.active#s5.s5-play .s5-card[data-s5-card="0"] .bullet:nth-child(3) { transition-delay: 0.81s; }
+.slide.active#s5.s5-play .s5-card[data-s5-card="1"] .bullet:nth-child(1) { transition-delay: 0.75s; }
+.slide.active#s5.s5-play .s5-card[data-s5-card="1"] .bullet:nth-child(2) { transition-delay: 0.88s; }
+.slide.active#s5.s5-play .s5-card[data-s5-card="1"] .bullet:nth-child(3) { transition-delay: 1.01s; }
+.slide.active#s5.s5-play .s5-card[data-s5-card="1"] .bullet:nth-child(4) { transition-delay: 1.14s; }
+.slide.active#s5.s5-play .s5-card[data-s5-card="2"] .bullet:nth-child(1) { transition-delay: 0.95s; }
+.slide.active#s5.s5-play .s5-card[data-s5-card="2"] .bullet:nth-child(2) { transition-delay: 1.08s; }
+.slide.active#s5.s5-play .s5-card[data-s5-card="2"] .bullet:nth-child(3) { transition-delay: 1.21s; }
+/* Bullet-dot pop on reveal: gentle tap */
+@keyframes s5DotTap {
+  0%   { transform: scale(.3); }
+  55%  { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+.slide.active#s5.s5-play .bullet .bullet-dot {
+  animation: s5DotTap 0.6s var(--ease-out) both;
+}
+/* Featured card confidence glow after settle */
+@keyframes s5FeatGlow {
+  0%, 100% { box-shadow: 0 12px 32px rgba(122,158,126,.14); }
+  50%      { box-shadow: 0 16px 44px rgba(122,158,126,.26); }
+}
+.slide.active#s5.s5-play .s5-card-feat {
+  animation: s5FeatGlow 4.2s var(--ease-morph) infinite 1.6s;
+}
+
 /* ── s7 Zukunft: column timeline sweep + header tab states ── */
 #s7 .s7-head, #s7 .s7-cell, #s7 .s7-rowlabel {
   opacity: 0;
@@ -1397,7 +1446,7 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
 
     <div data-reveal data-delay="4" style="display:flex;gap:16px;flex:1;align-items:stretch">
       <!-- Box 1 -->
-      <div class="card card-hover" style="flex:1;padding:24px;display:flex;flex-direction:column">
+      <div class="card card-hover s5-card" data-s5-card="0" style="flex:1;padding:24px;display:flex;flex-direction:column">
         <div style="font-size:44px;font-weight:900;color:var(--navy);letter-spacing:-2px;line-height:1;margin-bottom:12px;opacity:.15">100%</div>
         <div class="ic ic-lg ic-navy" style="margin-bottom:16px">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
@@ -1412,7 +1461,7 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
       </div>
 
       <!-- Box 2 – FEATURED -->
-      <div class="card-feat" style="flex:1.15;padding:24px;display:flex;flex-direction:column">
+      <div class="card-feat s5-card s5-card-feat" data-s5-card="1" style="flex:1.15;padding:24px;display:flex;flex-direction:column">
         <div class="feat-star">Fokus</div>
         <div style="font-size:44px;font-weight:900;color:var(--sage);letter-spacing:-2px;line-height:1;margin-bottom:12px;opacity:.2">7+</div>
         <div class="ic ic-lg ic-sage" style="margin-bottom:16px;margin-top:8px">
@@ -1429,7 +1478,7 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
       </div>
 
       <!-- Box 3 -->
-      <div class="card card-hover" style="flex:1;padding:24px;display:flex;flex-direction:column">
+      <div class="card card-hover s5-card" data-s5-card="2" style="flex:1;padding:24px;display:flex;flex-direction:column">
         <div style="font-size:44px;font-weight:900;color:var(--gold);letter-spacing:-2px;line-height:1;margin-bottom:12px;opacity:.2">€2M</div>
         <div class="ic ic-lg ic-gold" style="margin-bottom:16px">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
@@ -2798,6 +2847,15 @@ if(cur === 3) { setTimeout(wwAnimate, 400); }
         setTimeout(function() { startWwEnergy(); }, 450);
       } else {
         stopWwEnergy();
+      }
+
+      // s5 Kriterien card cascade
+      var s5El = document.getElementById('s5');
+      if (s5El) {
+        s5El.classList.remove('s5-play');
+        if (idx === 5) {
+          setTimeout(function(){ s5El.classList.add('s5-play'); }, 350);
+        }
       }
 
       // s7 Zukunft timeline sweep
