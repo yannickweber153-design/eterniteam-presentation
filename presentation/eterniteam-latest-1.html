@@ -305,13 +305,16 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
 .fut-col{transition:border-color .2s,box-shadow .2s}
 .fut-col:hover{border-color:var(--sage2)!important;box-shadow:0 4px 18px rgba(27,58,92,.1)}
 
-/* ── STEP 3: Team accordion ── */
-.advisor-acc{cursor:pointer;display:flex;align-items:center;gap:10px;
-  padding:10px 14px;border-radius:10px;background:#fff;border:1px solid var(--border);
-  transition:border-color .2s,box-shadow .2s;user-select:none}
-.advisor-acc:hover{border-color:var(--sage2);box-shadow:0 2px 10px rgba(27,58,92,.08)}
-.advisor-body{overflow:hidden;max-height:0;transition:max-height .35s ease}
-.advisor-body.open{max-height:200px}
+/* ── Team cards ── */
+.tc-card{border-radius:18px;overflow:hidden;background:#fff;border:1px solid rgba(27,58,92,.08);box-shadow:0 2px 16px rgba(27,58,92,.06);display:flex;flex-direction:column;transition:box-shadow .25s,transform .25s}
+.tc-card.tc-clickable{cursor:pointer}
+.tc-card.tc-clickable:hover{box-shadow:0 12px 40px rgba(27,58,92,.14);transform:translateY(-3px)}
+.tc-card.tc-pinned{box-shadow:0 8px 36px rgba(27,58,92,.14);border-color:rgba(27,58,92,.14)}
+.tc-exp{overflow:hidden;height:0;transition:height .38s cubic-bezier(.4,0,.2,1)}
+.tc-chevron{transition:transform .3s cubic-bezier(.4,0,.2,1);color:var(--gray2)}
+.tc-card.tc-open .tc-chevron{transform:rotate(180deg)}
+.tc-linkedin{display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:9px;background:#EFF6FF;border:1px solid #BFDBFE;font-size:11.5px;font-weight:700;color:#1D4ED8;text-decoration:none;transition:background .2s}
+.tc-linkedin:hover{background:#DBEAFE}
 
 /* ── STEP 3: Investoren card same height ── */
 .inv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:stretch}
@@ -1366,113 +1369,162 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
 ═══════════════════════════════════════════════ -->
 <div class="slide" id="s9">
   <div class="grid-bg absolute inset-0"></div>
-  <div class="orb" style="width:480px;height:480px;background:radial-gradient(circle,rgba(27,58,92,.06) 0%,transparent 65%);top:-100px;right:-80px"></div>
+  <div class="orb" style="width:500px;height:500px;background:radial-gradient(circle,rgba(27,58,92,.06) 0%,transparent 65%);top:-100px;right:-80px"></div>
 
   <div class="slide-inner" style="padding-bottom:120px">
-    <!-- Header -->
-    <div style="margin-bottom:22px">
+    <div style="margin-bottom:20px">
       <div class="label afu" style="margin-bottom:10px">Unser Team</div>
       <h2 class="h2 afu d2">Erfahren, spezialisiert –<br>und persönlich erreichbar.</h2>
     </div>
 
-    <!-- ── Founders row ── -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px">
+    <!-- 5-col portrait card grid -->
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;align-items:start">
 
-      <!-- Dennis Konrad -->
-      <div class="card card-hover afu d3" style="padding:0;overflow:hidden;border-top:none">
+      <!-- ── Dennis Konrad · always open ── -->
+      <div class="tc-card tc-pinned afu d3" data-no-toggle="1">
         <div style="height:3px;background:linear-gradient(90deg,#1B3A5C,#3B7DD8)"></div>
-        <div style="padding:22px 24px 20px">
-          <!-- Header row -->
-          <div style="display:flex;gap:16px;align-items:center;margin-bottom:14px">
-            <div id="photo-dk" style="width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,#1B3A5C,#2E5A8C);flex-shrink:0;box-shadow:0 8px 24px rgba(27,58,92,.28);overflow:hidden"><img src="Dennis.png" style="width:100%;height:100%;object-fit:cover;object-position:center top" onerror="this.parentElement.innerHTML='DK'"></div>
-            <div style="flex:1;min-width:0">
-              <div style="font-size:16px;font-weight:800;color:var(--navy);letter-spacing:-.4px;margin-bottom:2px">Dennis Konrad</div>
-              <div style="font-size:12px;color:var(--sage);font-weight:500;margin-bottom:5px">Co-Founder & CIO</div>
-              <span style="display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:50px;background:rgba(122,158,126,.1);border:1px solid rgba(122,158,126,.22);font-size:9px;font-weight:700;color:var(--sage);letter-spacing:.1em;text-transform:uppercase">
-                <svg width="7" height="7" viewBox="0 0 24 24" fill="var(--sage)"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10" fill="none" stroke="#fff" stroke-width="2.5"/></svg>
-                Hauptansprechpartner
-              </span>
-            </div>
+        <!-- Photo -->
+        <div style="height:190px;overflow:hidden;background:linear-gradient(135deg,#1B3A5C,#2E5A8C)">
+          <img src="Dennis.png" style="width:100%;height:100%;object-fit:cover;object-position:center 15%" onerror="this.style.display='none'">
+        </div>
+        <!-- Name row -->
+        <div style="padding:14px 16px 10px">
+          <div style="font-size:14px;font-weight:800;color:var(--navy);letter-spacing:-.35px;margin-bottom:2px">Dennis Konrad</div>
+          <div style="font-size:11px;color:var(--sage);font-weight:600;margin-bottom:7px">Co-Founder & CIO</div>
+          <span style="display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:50px;background:rgba(122,158,126,.1);border:1px solid rgba(122,158,126,.22);font-size:8.5px;font-weight:700;color:var(--sage);letter-spacing:.1em;text-transform:uppercase">
+            <svg width="7" height="7" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="var(--sage)"/><polyline points="2,4 3.3,5.3 6,2.5" fill="none" stroke="#fff" stroke-width="1.3"/></svg>
+            Hauptansprechpartner
+          </span>
+        </div>
+        <!-- Always-visible expanded content -->
+        <div style="padding:2px 16px 18px">
+          <div style="font-size:11.5px;color:var(--gray2);line-height:1.6;margin-bottom:12px">Zentrale Anlaufstelle für Anfragen — zuständig für Sichtung, Auswahl und Koordination des EterniTeam Dealflows.</div>
+          <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px">
+            <span style="display:inline-flex;align-items:center;gap:5px;background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:4px 8px;font-size:10.5px;font-weight:600;color:var(--navy)"><img src="https://www.google.com/s2/favicons?domain=egroup.de&sz=64" width="13" height="13" style="border-radius:2px;flex-shrink:0" onerror="this.style.display='none'">EGroup</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:4px 8px;font-size:10.5px;font-weight:600;color:var(--navy)"><img src="https://www.google.com/s2/favicons?domain=thyssenkrupp.com&sz=64" width="13" height="13" style="border-radius:2px;flex-shrink:0" onerror="this.style.display='none'">Thyssen</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:4px 8px;font-size:10.5px;font-weight:600;color:var(--navy)"><img src="https://www.google.com/s2/favicons?domain=uni-muenster.de&sz=64" width="13" height="13" style="border-radius:2px;flex-shrink:0" onerror="this.style.display='none'">Uni MS</span>
           </div>
-          <!-- Bio -->
-          <div style="font-size:12.5px;color:var(--gray2);line-height:1.6;margin-bottom:14px">Zentrale Anlaufstelle für Anfragen — zuständig für Sichtung, Auswahl und Koordination des EterniTeam Dealflows.</div>
-          <!-- Previous roles -->
-          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px">
-            <span style="display:inline-flex;align-items:center;gap:6px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:5px 10px;font-size:11px;font-weight:600;color:var(--navy)"><img src="https://www.google.com/s2/favicons?domain=egroup.de&sz=64" width="14" height="14" style="border-radius:3px;flex-shrink:0" onerror="this.style.display='none'">EGroup</span>
-            <span style="display:inline-flex;align-items:center;gap:6px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:5px 10px;font-size:11px;font-weight:600;color:var(--navy)"><img src="https://www.google.com/s2/favicons?domain=thyssenkrupp.com&sz=64" width="14" height="14" style="border-radius:3px;flex-shrink:0" onerror="this.style.display='none'">Thyssenkrupp</span>
-            <span style="display:inline-flex;align-items:center;gap:6px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:5px 10px;font-size:11px;font-weight:600;color:var(--navy)"><img src="https://www.google.com/s2/favicons?domain=uni-muenster.de&sz=64" width="14" height="14" style="border-radius:3px;flex-shrink:0" onerror="this.style.display='none'">Uni Münster</span>
-          </div>
-          <!-- CTA buttons -->
-          <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <a href="mailto:deal@eterniteam.de" class="btn-p" style="font-size:12.5px;padding:9px 16px;text-decoration:none;border-radius:10px">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <a href="mailto:deal@eterniteam.de" class="btn-p" style="font-size:11.5px;padding:8px 13px;text-decoration:none;border-radius:9px;justify-content:center">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
               deal@eterniteam.de
             </a>
-            <a href="https://calendly.com/eterniteam" target="_blank" class="btn-s" style="font-size:12.5px;padding:9px 16px;text-decoration:none;border-radius:10px">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <a href="https://calendly.com/eterniteam" target="_blank" class="btn-s" style="font-size:11.5px;padding:8px 13px;text-decoration:none;border-radius:9px;justify-content:center">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
               Meeting buchen
+            </a>
+            <a href="https://linkedin.com/in/dennis-konrad" target="_blank" class="tc-linkedin" style="justify-content:center">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#1D4ED8"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn
             </a>
           </div>
         </div>
       </div>
 
-      <!-- Matthias Wilrich -->
-      <div class="card card-hover afu d4" style="padding:0;overflow:hidden;border-top:none">
+      <!-- ── Matthias Wilrich ── -->
+      <div class="tc-card tc-clickable afu d4" onclick="tcToggle(this)">
         <div style="height:3px;background:linear-gradient(90deg,#2B6CB0,#1B3A5C)"></div>
-        <div style="padding:22px 24px 20px">
-          <div style="display:flex;gap:16px;align-items:center;margin-bottom:14px">
-            <div id="photo-mw" style="width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,#2B6CB0,#1B3A5C);flex-shrink:0;box-shadow:0 8px 24px rgba(43,108,176,.25);overflow:hidden"><img src="Matthias.png" style="width:100%;height:100%;object-fit:cover;object-position:center top" onerror="this.parentElement.innerHTML='MW'"></div>
-            <div>
-              <div style="font-size:16px;font-weight:800;color:var(--navy);letter-spacing:-.4px;margin-bottom:2px">Matthias Wilrich</div>
-              <div style="font-size:12px;color:var(--sage);font-weight:500">Co-Founder & CEO</div>
+        <div style="height:190px;overflow:hidden;background:linear-gradient(135deg,#2B6CB0,#1B3A5C)">
+          <img src="Matthias.png" style="width:100%;height:100%;object-fit:cover;object-position:center 15%" onerror="this.style.display='none'">
+        </div>
+        <div style="padding:14px 16px 12px;display:flex;align-items:start;justify-content:space-between">
+          <div>
+            <div style="font-size:14px;font-weight:800;color:var(--navy);letter-spacing:-.35px;margin-bottom:2px">Matthias Wilrich</div>
+            <div style="font-size:11px;color:var(--sage);font-weight:600">Co-Founder & CEO</div>
+          </div>
+          <svg class="tc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-top:2px;flex-shrink:0"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="tc-exp">
+          <div style="padding:0 16px 16px">
+            <div style="font-size:11.5px;color:var(--gray2);line-height:1.6;margin-bottom:10px">11 Jahre Erfahrung im Unternehmertum. Operative COO- und CFO-Rollen. Ehemaliger Strategie- und Prozessberater.</div>
+            <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:11px">
+              <span style="display:inline-flex;align-items:center;gap:5px;background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:4px 8px;font-size:10.5px;font-weight:600;color:var(--navy)"><img src="https://www.google.com/s2/favicons?domain=accenture.com&sz=64" width="13" height="13" style="border-radius:2px;flex-shrink:0" onerror="this.style.display='none'">Accenture</span>
+              <span style="display:inline-flex;align-items:center;gap:5px;background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:4px 8px;font-size:10.5px;font-weight:600;color:var(--navy)"><img src="https://www.google.com/s2/favicons?domain=q-cells.com&sz=64" width="13" height="13" style="border-radius:2px;flex-shrink:0" onerror="this.style.display='none'">Qcells</span>
+              <span style="display:inline-flex;align-items:center;gap:5px;background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:4px 8px;font-size:10.5px;font-weight:600;color:var(--navy)"><img src="https://www.google.com/s2/favicons?domain=lesara.com&sz=64" width="13" height="13" style="border-radius:2px;flex-shrink:0" onerror="this.style.display='none'">Lesara</span>
+              <span style="display:inline-flex;align-items:center;gap:5px;background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:4px 8px;font-size:10.5px;font-weight:600;color:var(--navy)"><img src="https://www.google.com/s2/favicons?domain=whu.edu&sz=64" width="13" height="13" style="border-radius:2px;flex-shrink:0" onerror="this.style.display='none'">WHU</span>
             </div>
-          </div>
-          <div style="font-size:12.5px;color:var(--gray2);line-height:1.6;margin-bottom:14px">Über 11 Jahre Erfahrung im Unternehmertum. Operative COO- und CFO-Rollen. Ehemaliger Strategie- und Prozessberater.</div>
-          <div style="display:flex;gap:6px;flex-wrap:wrap">
-            <span style="display:inline-flex;align-items:center;gap:6px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:5px 10px;font-size:11px;font-weight:600;color:var(--navy)"><img src="https://www.google.com/s2/favicons?domain=accenture.com&sz=64" width="14" height="14" style="border-radius:3px;flex-shrink:0" onerror="this.style.display='none'">Accenture</span>
-            <span style="display:inline-flex;align-items:center;gap:6px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:5px 10px;font-size:11px;font-weight:600;color:var(--navy)"><img src="https://www.google.com/s2/favicons?domain=q-cells.com&sz=64" width="14" height="14" style="border-radius:3px;flex-shrink:0" onerror="this.style.display='none'">Qcells</span>
-            <span style="display:inline-flex;align-items:center;gap:6px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:5px 10px;font-size:11px;font-weight:600;color:var(--navy)"><img src="https://www.google.com/s2/favicons?domain=lesara.com&sz=64" width="14" height="14" style="border-radius:3px;flex-shrink:0" onerror="this.style.display='none'">Lesara</span>
-            <span style="display:inline-flex;align-items:center;gap:6px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:5px 10px;font-size:11px;font-weight:600;color:var(--navy)"><img src="https://www.google.com/s2/favicons?domain=whu.edu&sz=64" width="14" height="14" style="border-radius:3px;flex-shrink:0" onerror="this.style.display='none'">WHU</span>
+            <a href="https://linkedin.com/in/matthias-wilrich" target="_blank" class="tc-linkedin">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#1D4ED8"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn
+            </a>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- ── Extended Team row (always visible) ── -->
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px" class="afu d5">
-      <!-- Jan Roschke -->
-      <div class="card card-hover" style="padding:0;overflow:hidden;border-top:none">
+      <!-- ── Jan Roschke ── -->
+      <div class="tc-card tc-clickable afu d5" onclick="tcToggle(this)">
         <div style="height:3px;background:linear-gradient(90deg,#5B21B6,#7C3AED)"></div>
-        <div style="padding:18px 20px 16px;display:flex;align-items:center;gap:14px">
-          <div id="photo-jr" style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#5B21B6,#7C3AED);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;letter-spacing:-.3px;flex-shrink:0;box-shadow:0 5px 14px rgba(91,33,182,.25);overflow:hidden">JR</div>
+        <div style="height:190px;overflow:hidden;background:linear-gradient(135deg,#5B21B6,#7C3AED);display:flex;align-items:center;justify-content:center">
+          <div id="photo-jr" style="width:100%;height:100%;overflow:hidden">
+            <img src="Jan.png" style="width:100%;height:100%;object-fit:cover;object-position:center 15%" onerror="this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';this.remove();this.parentElement.innerHTML='<span style=\'font-size:42px;font-weight:800;color:rgba(255,255,255,.35)\'>JR</span>'">
+          </div>
+        </div>
+        <div style="padding:14px 16px 12px;display:flex;align-items:start;justify-content:space-between">
           <div>
-            <div style="font-size:13.5px;font-weight:700;color:var(--navy);letter-spacing:-.25px;margin-bottom:3px">Jan Roschke</div>
-            <div style="font-size:11px;color:var(--gray2);font-weight:500">Director Operations</div>
+            <div style="font-size:14px;font-weight:800;color:var(--navy);letter-spacing:-.35px;margin-bottom:2px">Jan Roschke</div>
+            <div style="font-size:11px;color:var(--sage);font-weight:600">Director Operations</div>
+          </div>
+          <svg class="tc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-top:2px;flex-shrink:0"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="tc-exp">
+          <div style="padding:0 16px 16px">
+            <div style="font-size:11.5px;color:var(--gray2);line-height:1.6;margin-bottom:11px">Verantwortlich für operative Exzellenz und Prozessoptimierung im EterniTeam Dealflow.</div>
+            <a href="https://linkedin.com/in/jan-roschke" target="_blank" class="tc-linkedin">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#1D4ED8"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn
+            </a>
           </div>
         </div>
       </div>
-      <!-- Clemens Meyer -->
-      <div class="card card-hover" style="padding:0;overflow:hidden;border-top:none">
+
+      <!-- ── Clemens Meyer ── -->
+      <div class="tc-card tc-clickable afu d6" onclick="tcToggle(this)">
         <div style="height:3px;background:linear-gradient(90deg,#0D6B63,#0F9E8E)"></div>
-        <div style="padding:18px 20px 16px;display:flex;align-items:center;gap:14px">
-          <div id="photo-cm" style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#0D6B63,#0F9E8E);flex-shrink:0;box-shadow:0 5px 14px rgba(13,107,99,.25);overflow:hidden"><img src="Clemens.png" style="width:100%;height:100%;object-fit:cover;object-position:center top" onerror="this.parentElement.innerHTML='CM'"></div>
+        <div style="height:190px;overflow:hidden;background:linear-gradient(135deg,#0D6B63,#0F9E8E)">
+          <img src="Clemens.png" style="width:100%;height:100%;object-fit:cover;object-position:center 15%" onerror="this.style.opacity=0">
+        </div>
+        <div style="padding:14px 16px 12px;display:flex;align-items:start;justify-content:space-between">
           <div>
-            <div style="font-size:13.5px;font-weight:700;color:var(--navy);letter-spacing:-.25px;margin-bottom:3px">Clemens Meyer</div>
-            <div style="font-size:11px;color:var(--gray2);font-weight:500">VP Product & Engineering</div>
+            <div style="font-size:14px;font-weight:800;color:var(--navy);letter-spacing:-.35px;margin-bottom:2px">Clemens Meyer</div>
+            <div style="font-size:11px;color:var(--sage);font-weight:600">VP Product & Engineering</div>
+          </div>
+          <svg class="tc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-top:2px;flex-shrink:0"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="tc-exp">
+          <div style="padding:0 16px 16px">
+            <div style="font-size:11.5px;color:var(--gray2);line-height:1.6;margin-bottom:11px">Verantwortlich für Produktentwicklung und technologische Infrastruktur der EterniTeam Plattform.</div>
+            <a href="https://linkedin.com/in/clemens-meyer" target="_blank" class="tc-linkedin">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#1D4ED8"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn
+            </a>
           </div>
         </div>
       </div>
-      <!-- Sevkan Saylik -->
-      <div class="card card-hover" style="padding:0;overflow:hidden;border-top:none">
+
+      <!-- ── Sevkan Saylik ── -->
+      <div class="tc-card tc-clickable afu d7" onclick="tcToggle(this)">
         <div style="height:3px;background:linear-gradient(90deg,#92400E,#D97706)"></div>
-        <div style="padding:18px 20px 16px;display:flex;align-items:center;gap:14px">
-          <div id="photo-ss" style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#92400E,#D97706);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;letter-spacing:-.3px;flex-shrink:0;box-shadow:0 5px 14px rgba(146,64,14,.25);overflow:hidden">SS</div>
+        <div style="height:190px;overflow:hidden;background:linear-gradient(135deg,#92400E,#D97706);display:flex;align-items:center;justify-content:center">
+          <span style="font-size:42px;font-weight:800;color:rgba(255,255,255,.35)">SS</span>
+        </div>
+        <div style="padding:14px 16px 12px;display:flex;align-items:start;justify-content:space-between">
           <div>
-            <div style="font-size:13.5px;font-weight:700;color:var(--navy);letter-spacing:-.25px;margin-bottom:3px">Sevkan Saylik</div>
-            <div style="font-size:11px;color:var(--gray2);font-weight:500">Director HR</div>
+            <div style="font-size:14px;font-weight:800;color:var(--navy);letter-spacing:-.35px;margin-bottom:2px">Sevkan Saylik</div>
+            <div style="font-size:11px;color:var(--sage);font-weight:600">Director HR</div>
+          </div>
+          <svg class="tc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-top:2px;flex-shrink:0"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="tc-exp">
+          <div style="padding:0 16px 16px">
+            <div style="font-size:11.5px;color:var(--gray2);line-height:1.6;margin-bottom:11px">Verantwortlich für Talent Acquisition, Teamkultur und HR-Strategie bei EterniTeam.</div>
+            <a href="https://linkedin.com/in/sevkan-saylik" target="_blank" class="tc-linkedin">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#1D4ED8"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn
+            </a>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </div>
@@ -1970,6 +2022,22 @@ function toggleAdvisors(btn) {
   const chevron = document.getElementById('acc-chevron');
   body.classList.toggle('open');
   if(chevron) chevron.style.transform = body.classList.contains('open') ? 'rotate(180deg)' : '';
+}
+
+function tcToggle(card) {
+  if (card.dataset.noToggle) return;
+  const exp = card.querySelector('.tc-exp');
+  const inner = exp.firstElementChild;
+  const isOpen = card.classList.contains('tc-open');
+  // Close all other open cards in this slide
+  card.closest('.slide').querySelectorAll('.tc-card.tc-open').forEach(c => {
+    c.classList.remove('tc-open');
+    c.querySelector('.tc-exp').style.height = '0';
+  });
+  if (!isOpen) {
+    card.classList.add('tc-open');
+    exp.style.height = inner.offsetHeight + 'px';
+  }
 }
 
 // Init first slide
