@@ -785,6 +785,32 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
 .a6-stab:hover { transform: translateY(-1px); }
 .a6-stab-on { transform: translateY(-1px); }
 
+/* ── s1 Problem: tension curve + pill beats ── */
+#s1Tension { opacity: 0; transition: opacity 0.9s var(--ease-out); }
+.slide.active#s1 #s1Tension { opacity: 0.55; }
+#s1TensionPath, #s1TensionPathBlur {
+  stroke-dasharray: var(--tc-len, 2000);
+  stroke-dashoffset: var(--tc-len, 2000);
+  transition: stroke-dashoffset 2.2s var(--ease-morph);
+}
+.slide.active#s1 #s1TensionPath.drawn,
+.slide.active#s1 #s1TensionPathBlur.drawn { stroke-dashoffset: 0; }
+.s1-pill-beat {
+  opacity: 0;
+  transform: translateY(8px) scale(.96);
+  transition: opacity 0.55s var(--ease-out), transform 0.55s var(--ease-out);
+}
+.s1-pill-beat.revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+@keyframes s1PillFlash {
+  0%   { box-shadow: 0 0 0 0 rgba(248,113,113,0); }
+  35%  { box-shadow: 0 0 0 6px rgba(248,113,113,.28); }
+  100% { box-shadow: 0 0 0 0 rgba(248,113,113,0); }
+}
+.s1-pill-beat.flash { animation: s1PillFlash 1.1s var(--ease-out); }
+
 /* ── s3 Win·Win·Win: line draw + node breath + pulse fade ── */
 .ww-line {
   stroke-dasharray: var(--ww-len, 800);
@@ -990,6 +1016,29 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
   <div class="grid-dark absolute inset-0"></div>
   <div class="orb" style="width:500px;height:500px;background:radial-gradient(circle,rgba(239,68,68,.08) 0%,transparent 65%);top:-100px;right:-100px"></div>
 
+  <!-- Tension curve: rising line that telegraphs escalating problem -->
+  <svg id="s1Tension" viewBox="0 0 1400 800" preserveAspectRatio="none"
+       style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:.55">
+    <defs>
+      <linearGradient id="s1TensionGrad" x1="0" y1="1" x2="1" y2="0">
+        <stop offset="0%" stop-color="#7A9E7E" stop-opacity="0"/>
+        <stop offset="35%" stop-color="#7A9E7E" stop-opacity=".35"/>
+        <stop offset="75%" stop-color="#f87171" stop-opacity=".65"/>
+        <stop offset="100%" stop-color="#f87171" stop-opacity=".85"/>
+      </linearGradient>
+      <filter id="s1TensionBlur"><feGaussianBlur stdDeviation="2.5"/></filter>
+    </defs>
+    <!-- soft underlay -->
+    <path id="s1TensionPathBlur" d="M -40 680 C 260 660, 520 610, 760 480 S 1180 180, 1460 60"
+      stroke="url(#s1TensionGrad)" stroke-width="6" fill="none" stroke-linecap="round" filter="url(#s1TensionBlur)" opacity=".4"/>
+    <!-- crisp line -->
+    <path id="s1TensionPath" d="M -40 680 C 260 660, 520 610, 760 480 S 1180 180, 1460 60"
+      stroke="url(#s1TensionGrad)" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+    <!-- tension beat dot -->
+    <circle id="s1TensionDot" r="5" fill="#f87171" opacity="0" filter="url(#s1TensionBlur)"/>
+    <circle id="s1TensionDot2" r="2.5" fill="#f87171" opacity="0"/>
+  </svg>
+
   <div class="slide-inner justify-between">
     <div>
       <div class="label" data-reveal data-delay="1" style="color:rgba(181,207,186,.8);margin-bottom:10px">Das Problem</div>
@@ -1031,11 +1080,11 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
         <div style="font-size:15px;color:rgba(255,255,255,.55);line-height:1.5">eine Nachfolge in Deutschland</div>
       </div>
       <div style="display:flex;flex-direction:column;gap:10px;flex-shrink:0">
-        <div style="padding:10px 16px;border-radius:50px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15)">
+        <div class="s1-pill-beat" style="padding:10px 16px;border-radius:50px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15)">
           <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px">davon</div>
           <div style="font-size:13px;font-weight:600;color:#fff">nur ~20% erfolgreich gelöst</div>
         </div>
-        <div style="padding:10px 16px;border-radius:50px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15)">
+        <div class="s1-pill-beat" style="padding:10px 16px;border-radius:50px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15)">
           <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px">durchschnittlich</div>
           <div style="font-size:13px;font-weight:600;color:#fff">∅ 7 Jahre Suche</div>
         </div>
@@ -2693,6 +2742,13 @@ if(cur === 3) { setTimeout(wwAnimate, 400); }
         stopWwEnergy();
       }
 
+      // s1 tension curve
+      if (idx === 1) {
+        setTimeout(function() { startS1Tension(); }, 400);
+      } else {
+        stopS1Tension();
+      }
+
       // s1 big stat countup
       if (idx === 1) {
         setTimeout(function() {
@@ -2706,6 +2762,76 @@ if(cur === 3) { setTimeout(wwAnimate, 400); }
         }, 1200);
       }
     };
+  }
+
+  // ── s1 Problem tension curve ──────────────────────────────
+  var s1Raf = null, s1Start = 0;
+  function startS1Tension() {
+    var path = document.getElementById('s1TensionPath');
+    var pathBlur = document.getElementById('s1TensionPathBlur');
+    var dot = document.getElementById('s1TensionDot');
+    var dot2 = document.getElementById('s1TensionDot2');
+    if (!path) return;
+    var L = path.getTotalLength();
+    [path, pathBlur].forEach(function(p){
+      if (!p) return;
+      p.style.setProperty('--tc-len', L);
+      p.classList.remove('drawn');
+      void p.getBoundingClientRect();
+      p.classList.add('drawn');
+    });
+
+    // Pill beats staggered after curve draws
+    var pills = document.querySelectorAll('#s1 .s1-pill-beat');
+    pills.forEach(function(el){ el.classList.remove('revealed','flash'); });
+    pills.forEach(function(el, i){
+      setTimeout(function(){
+        el.classList.add('revealed');
+        setTimeout(function(){ el.classList.add('flash'); }, 180);
+      }, 1400 + i * 420);
+    });
+
+    // Dot travels along curve, arriving at the tension peak
+    stopS1Tension();
+    s1Start = performance.now();
+    var travel = 2200; // ms
+    function frame(now){
+      var t = Math.min(1, (now - s1Start) / travel);
+      var eased = t < 0.5 ? 2*t*t : 1 - Math.pow(-2*t+2, 2)/2;
+      var pt = path.getPointAtLength(eased * L);
+      if (dot)  { dot.setAttribute('cx', pt.x);  dot.setAttribute('cy', pt.y);  dot.setAttribute('opacity', (Math.min(1, t*3) * 0.9).toFixed(3)); }
+      if (dot2) { dot2.setAttribute('cx', pt.x); dot2.setAttribute('cy', pt.y); dot2.setAttribute('opacity', Math.min(1, t*3).toFixed(3)); }
+      if (t < 1) { s1Raf = requestAnimationFrame(frame); }
+      else {
+        // Arrival pulse
+        if (dot) {
+          var t0 = performance.now();
+          (function bloom(){
+            var u = Math.min(1, (performance.now() - t0) / 900);
+            var r = 5 + 14 * u;
+            var a = 0.9 * (1 - u);
+            dot.setAttribute('r', r);
+            dot.setAttribute('opacity', a.toFixed(3));
+            if (u < 1) s1Raf = requestAnimationFrame(bloom);
+          })();
+        }
+      }
+    }
+    s1Raf = requestAnimationFrame(frame);
+  }
+  function stopS1Tension() {
+    if (s1Raf) { cancelAnimationFrame(s1Raf); s1Raf = null; }
+    ['s1TensionPath','s1TensionPathBlur'].forEach(function(id){
+      var p = document.getElementById(id);
+      if (p) p.classList.remove('drawn');
+    });
+    var dot = document.getElementById('s1TensionDot');
+    var dot2 = document.getElementById('s1TensionDot2');
+    if (dot) { dot.setAttribute('opacity','0'); dot.setAttribute('r','5'); }
+    if (dot2) dot2.setAttribute('opacity','0');
+    document.querySelectorAll('#s1 .s1-pill-beat').forEach(function(el){
+      el.classList.remove('revealed','flash');
+    });
   }
 
   // ── s3 Win·Win·Win travelling energy pulses ─────────────────
