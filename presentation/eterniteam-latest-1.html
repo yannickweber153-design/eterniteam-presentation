@@ -785,6 +785,22 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
 .a6-stab:hover { transform: translateY(-1px); }
 .a6-stab-on { transform: translateY(-1px); }
 
+/* ── s2 Lösung: per-card line→icon→headline→copy choreography ── */
+.s2-card .s2-accent {
+  position: absolute; top: 0; left: 28px; height: 2px; width: 0;
+  border-radius: 2px;
+  transition: width 0.7s var(--ease-morph);
+}
+.s2-card .s2-ico, .s2-card .s2-h, .s2-card .s2-c {
+  opacity: 0; transform: translateY(8px);
+  transition: opacity 0.55s var(--ease-out), transform 0.55s var(--ease-out);
+}
+.s2-card .s2-ico { transform: translateY(0) scale(.78); transition: opacity 0.6s var(--ease-out), transform 0.7s var(--ease-out); }
+.slide.active#s2 .s2-card.s2-play .s2-accent { width: calc(100% - 56px); }
+.slide.active#s2 .s2-card.s2-play .s2-ico    { opacity: 1; transform: translateY(0) scale(1); transition-delay: 0.25s; }
+.slide.active#s2 .s2-card.s2-play .s2-h      { opacity: 1; transform: translateY(0); transition-delay: 0.45s; }
+.slide.active#s2 .s2-card.s2-play .s2-c      { opacity: 1; transform: translateY(0); transition-delay: 0.6s; }
+
 /* ── s1 Problem: tension curve + pill beats ── */
 #s1Tension { opacity: 0; transition: opacity 0.9s var(--ease-out); }
 .slide.active#s1 #s1Tension { opacity: 0.55; }
@@ -1108,26 +1124,29 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
     </div>
 
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;flex:1;align-content:start">
-      <div class="card card-hover" data-reveal="scale" data-delay="5" style="padding:28px">
-        <div class="ic ic-lg ic-sage" style="margin-bottom:20px">
+      <div class="card card-hover s2-card" data-s2-idx="0" data-reveal="scale" data-delay="5" style="padding:28px;position:relative">
+        <span class="s2-accent" style="background:var(--sage)"></span>
+        <div class="ic ic-lg ic-sage s2-ico" style="margin-bottom:20px">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.7"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
         </div>
-        <div class="h4" style="margin-bottom:10px">Transaktionssicherheit</div>
-        <div class="body-sm">Einziger Ansprechpartner mit eigenem Kapital – klar, verlässlich, ohne Überraschungen.</div>
+        <div class="h4 s2-h" style="margin-bottom:10px">Transaktionssicherheit</div>
+        <div class="body-sm s2-c">Einziger Ansprechpartner mit eigenem Kapital – klar, verlässlich, ohne Überraschungen.</div>
       </div>
-      <div class="card card-hover" data-reveal="scale" data-delay="7" style="padding:28px">
-        <div class="ic ic-lg ic-navy" style="margin-bottom:20px">
+      <div class="card card-hover s2-card" data-s2-idx="1" data-reveal="scale" data-delay="7" style="padding:28px;position:relative">
+        <span class="s2-accent" style="background:var(--navy)"></span>
+        <div class="ic ic-lg ic-navy s2-ico" style="margin-bottom:20px">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.7"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         </div>
-        <div class="h4" style="margin-bottom:10px">Kein Exit geplant</div>
-        <div class="body-sm">Ihr Unternehmen wird nicht weiterverkauft. Die langfristige Perspektive steht im Vordergrund.</div>
+        <div class="h4 s2-h" style="margin-bottom:10px">Kein Exit geplant</div>
+        <div class="body-sm s2-c">Ihr Unternehmen wird nicht weiterverkauft. Die langfristige Perspektive steht im Vordergrund.</div>
       </div>
-      <div class="card card-hover" data-reveal="scale" data-delay="9" style="padding:28px">
-        <div class="ic ic-lg ic-gold" style="margin-bottom:20px">
+      <div class="card card-hover s2-card" data-s2-idx="2" data-reveal="scale" data-delay="9" style="padding:28px;position:relative">
+        <span class="s2-accent" style="background:var(--gold)"></span>
+        <div class="ic ic-lg ic-gold s2-ico" style="margin-bottom:20px">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.7"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
-        <div class="h4" style="margin-bottom:10px">Operative Unterstützung</div>
-        <div class="body-sm">Experten-Teams & Shared Services für Marketing, Recruiting und mehr.</div>
+        <div class="h4 s2-h" style="margin-bottom:10px">Operative Unterstützung</div>
+        <div class="body-sm s2-c">Experten-Teams & Shared Services für Marketing, Recruiting und mehr.</div>
       </div>
     </div>
   </div>
@@ -2740,6 +2759,15 @@ if(cur === 3) { setTimeout(wwAnimate, 400); }
         setTimeout(function() { startWwEnergy(); }, 450);
       } else {
         stopWwEnergy();
+      }
+
+      // s2 Lösung per-card choreography
+      var s2Cards = document.querySelectorAll('#s2 .s2-card');
+      s2Cards.forEach(function(c){ c.classList.remove('s2-play'); });
+      if (idx === 2) {
+        s2Cards.forEach(function(c, i){
+          setTimeout(function(){ c.classList.add('s2-play'); }, 400 + i * 260);
+        });
       }
 
       // s1 tension curve
