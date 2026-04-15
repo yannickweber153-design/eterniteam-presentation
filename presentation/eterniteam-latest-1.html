@@ -1056,19 +1056,17 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
      Live version: <HeroWithPlayer> from src/components/HeroWithPlayer.tsx
      To render as video: npm run render:hero-bg in eterniteam-remotion/
      Current: CSS-animated equivalent (same motion, no build step required) -->
-  <div id="s0-bg-layer" style="position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden">
-    <!-- Cream base -->
-    <div style="position:absolute;inset:0;background:#EDF2F7"></div>
-    <!-- Animated gradient overlay -->
-    <div class="s0-grad-overlay" style="position:absolute;inset:0;pointer-events:none"></div>
-    <!-- Orb: sage top-right -->
-    <div class="s0-orb-sage" style="position:absolute;width:680px;height:680px;border-radius:50%;background:radial-gradient(circle,rgba(122,158,126,.09) 0%,transparent 65%);top:-8%;right:-6%;pointer-events:none"></div>
-    <!-- Orb: navy bottom-left -->
-    <div class="s0-orb-navy" style="position:absolute;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(27,58,92,.055) 0%,transparent 65%);bottom:-12%;left:-5%;pointer-events:none"></div>
-    <!-- Light sweep: runs once every 10s -->
-    <div class="s0-sweep" style="position:absolute;inset:0;pointer-events:none"></div>
-    <!-- Grain -->
-    <div style="position:absolute;inset:0;opacity:.022;pointer-events:none"><svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%'><filter id='g-h'><feTurbulence type='fractalNoise' baseFrequency='.68' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(#g-h)'/></svg></div>
+  <div id="s0-bg-layer" style="position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:#EDF2F7">
+    <!-- Cinematic 6s loop: 3-layer parallax, breathing gradient, spring-physics light sweep, film grain.
+         Rendered via Remotion (src/IntroBg.tsx). WebM ~74KB, MP4 fallback ~737KB. -->
+    <video
+      class="s0-bg-video"
+      autoplay muted loop playsinline preload="auto"
+      style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none"
+      aria-hidden="true">
+      <source src="media/intro-bg.webm" type="video/webm">
+      <source src="media/intro-bg.mp4" type="video/mp4">
+    </video>
   </div>
 
   <!-- Base background: cool, clean, defined -->
