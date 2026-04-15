@@ -1443,84 +1443,90 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
       </div>
     </div>
 
-    <!-- ── Extended team (3-col, expand on click) ── -->
+    <!-- ── Extended team (3-col, vertical cards, avatar-style) ── -->
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px" class="afu d5">
 
       <!-- Jan Roschke -->
-      <div class="tc-card tc-clickable" onclick="tcToggle(this)" style="flex-direction:row">
-        <div style="width:100px;flex-shrink:0;overflow:hidden;background:linear-gradient(160deg,#1B3A5C,#2E5A8C);display:flex;align-items:center;justify-content:center">
-          <img src="Jan.png" style="width:100%;height:100%;object-fit:cover;object-position:center 20%" onerror="this.style.opacity=0;this.nextElementSibling.style.display='flex'">
-          <span style="display:none;font-size:28px;font-weight:800;color:rgba(255,255,255,.25)">JR</span>
-        </div>
-        <div style="flex:1;min-width:0">
-          <div style="padding:14px 14px 12px;display:flex;align-items:center;justify-content:space-between">
-            <div>
-              <div style="font-size:13px;font-weight:800;color:var(--navy);letter-spacing:-.3px;margin-bottom:2px">Jan Roschke</div>
-              <div style="font-size:10px;color:var(--sage);font-weight:600">Director Operations</div>
-            </div>
-            <svg class="tc-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0;color:var(--gray2)"><polyline points="6 9 12 15 18 9"/></svg>
+      <div class="tc-card tc-clickable" onclick="tcToggle(this)">
+        <div style="height:120px;background:linear-gradient(135deg,#1B3A5C 0%,#243f62 50%,#2a4d74 100%);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden">
+          <div style="position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.04)"></div>
+          <div style="position:absolute;bottom:-20px;left:-20px;width:90px;height:90px;border-radius:50%;background:rgba(59,125,216,.06)"></div>
+          <div style="width:76px;height:76px;border-radius:50%;overflow:hidden;border:2.5px solid rgba(255,255,255,.18);box-shadow:0 4px 20px rgba(0,0,0,.3);position:relative;z-index:1;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center">
+            <img src="Jan.png" style="width:100%;height:100%;object-fit:cover;object-position:center top" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span style="display:none;font-size:22px;font-weight:800;color:rgba(255,255,255,.5);letter-spacing:-1px">JR</span>
           </div>
-          <div class="tc-exp">
-            <div style="padding:0 14px 14px">
-              <div style="width:100%;height:1px;background:var(--border);margin-bottom:10px"></div>
-              <div style="font-size:11px;color:var(--gray2);line-height:1.6;margin-bottom:10px">Verantwortlich für operative Exzellenz und Prozessoptimierung im EterniTeam Dealflow.</div>
-              <a href="https://linkedin.com/in/jan-roschke" target="_blank" class="tc-linkedin" style="width:100%;justify-content:center;font-size:11px">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="#1D4ED8"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-                LinkedIn
-              </a>
-            </div>
+        </div>
+        <div style="padding:13px 16px 11px;display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <div style="font-size:13.5px;font-weight:800;color:var(--navy);letter-spacing:-.35px;margin-bottom:2px">Jan Roschke</div>
+            <div style="font-size:10.5px;color:var(--sage);font-weight:600">Director Operations</div>
+          </div>
+          <svg class="tc-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0;color:var(--gray2)"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="tc-exp">
+          <div style="padding:0 16px 14px">
+            <div style="width:100%;height:1px;background:var(--border);margin-bottom:11px"></div>
+            <div style="font-size:11.5px;color:var(--gray2);line-height:1.65;margin-bottom:11px">Verantwortlich für operative Exzellenz und Prozessoptimierung im EterniTeam Dealflow.</div>
+            <a href="https://linkedin.com/in/jan-roschke" target="_blank" class="tc-linkedin" style="width:100%;justify-content:center">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="#1D4ED8"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn Profil
+            </a>
           </div>
         </div>
       </div>
 
       <!-- Clemens Meyer -->
-      <div class="tc-card tc-clickable" onclick="tcToggle(this)" style="flex-direction:row">
-        <div style="width:100px;flex-shrink:0;overflow:hidden;background:linear-gradient(160deg,#1B3A5C,#2E5A8C)">
-          <img src="Clemens.png" style="width:100%;height:100%;object-fit:cover;object-position:center 20%" onerror="this.style.opacity=0">
-        </div>
-        <div style="flex:1;min-width:0">
-          <div style="padding:14px 14px 12px;display:flex;align-items:center;justify-content:space-between">
-            <div>
-              <div style="font-size:13px;font-weight:800;color:var(--navy);letter-spacing:-.3px;margin-bottom:2px">Clemens Meyer</div>
-              <div style="font-size:10px;color:var(--sage);font-weight:600">VP Product & Engineering</div>
-            </div>
-            <svg class="tc-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0;color:var(--gray2)"><polyline points="6 9 12 15 18 9"/></svg>
+      <div class="tc-card tc-clickable" onclick="tcToggle(this)">
+        <div style="height:120px;background:linear-gradient(135deg,#1B3A5C 0%,#243f62 50%,#2a4d74 100%);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden">
+          <div style="position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.04)"></div>
+          <div style="position:absolute;bottom:-20px;left:-20px;width:90px;height:90px;border-radius:50%;background:rgba(59,125,216,.06)"></div>
+          <div style="width:76px;height:76px;border-radius:50%;overflow:hidden;border:2.5px solid rgba(255,255,255,.18);box-shadow:0 4px 20px rgba(0,0,0,.3);position:relative;z-index:1">
+            <img src="Clemens.png" style="width:100%;height:100%;object-fit:cover;object-position:center top" onerror="this.style.display='none'">
           </div>
-          <div class="tc-exp">
-            <div style="padding:0 14px 14px">
-              <div style="width:100%;height:1px;background:var(--border);margin-bottom:10px"></div>
-              <div style="font-size:11px;color:var(--gray2);line-height:1.6;margin-bottom:10px">Verantwortlich für Produktentwicklung und technologische Infrastruktur der EterniTeam Plattform.</div>
-              <a href="https://linkedin.com/in/clemens-meyer" target="_blank" class="tc-linkedin" style="width:100%;justify-content:center;font-size:11px">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="#1D4ED8"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-                LinkedIn
-              </a>
-            </div>
+        </div>
+        <div style="padding:13px 16px 11px;display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <div style="font-size:13.5px;font-weight:800;color:var(--navy);letter-spacing:-.35px;margin-bottom:2px">Clemens Meyer</div>
+            <div style="font-size:10.5px;color:var(--sage);font-weight:600">VP Product & Engineering</div>
+          </div>
+          <svg class="tc-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0;color:var(--gray2)"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="tc-exp">
+          <div style="padding:0 16px 14px">
+            <div style="width:100%;height:1px;background:var(--border);margin-bottom:11px"></div>
+            <div style="font-size:11.5px;color:var(--gray2);line-height:1.65;margin-bottom:11px">Verantwortlich für Produktentwicklung und technologische Infrastruktur der EterniTeam Plattform.</div>
+            <a href="https://linkedin.com/in/clemens-meyer" target="_blank" class="tc-linkedin" style="width:100%;justify-content:center">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="#1D4ED8"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn Profil
+            </a>
           </div>
         </div>
       </div>
 
       <!-- Sevkan Saylik -->
-      <div class="tc-card tc-clickable" onclick="tcToggle(this)" style="flex-direction:row">
-        <div style="width:100px;flex-shrink:0;overflow:hidden;background:linear-gradient(160deg,#1B3A5C,#2E5A8C);display:flex;align-items:center;justify-content:center">
-          <span style="font-size:32px;font-weight:800;color:rgba(255,255,255,.2)">SS</span>
-        </div>
-        <div style="flex:1;min-width:0">
-          <div style="padding:14px 14px 12px;display:flex;align-items:center;justify-content:space-between">
-            <div>
-              <div style="font-size:13px;font-weight:800;color:var(--navy);letter-spacing:-.3px;margin-bottom:2px">Sevkan Saylik</div>
-              <div style="font-size:10px;color:var(--sage);font-weight:600">Director HR</div>
-            </div>
-            <svg class="tc-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0;color:var(--gray2)"><polyline points="6 9 12 15 18 9"/></svg>
+      <div class="tc-card tc-clickable" onclick="tcToggle(this)">
+        <div style="height:120px;background:linear-gradient(135deg,#1B3A5C 0%,#243f62 50%,#2a4d74 100%);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden">
+          <div style="position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.04)"></div>
+          <div style="position:absolute;bottom:-20px;left:-20px;width:90px;height:90px;border-radius:50%;background:rgba(59,125,216,.06)"></div>
+          <div style="width:76px;height:76px;border-radius:50%;overflow:hidden;border:2.5px solid rgba(255,255,255,.18);box-shadow:0 4px 20px rgba(0,0,0,.3);position:relative;z-index:1;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center">
+            <span style="font-size:22px;font-weight:800;color:rgba(255,255,255,.55);letter-spacing:-1px">SS</span>
           </div>
-          <div class="tc-exp">
-            <div style="padding:0 14px 14px">
-              <div style="width:100%;height:1px;background:var(--border);margin-bottom:10px"></div>
-              <div style="font-size:11px;color:var(--gray2);line-height:1.6;margin-bottom:10px">Verantwortlich für Talent Acquisition, Teamkultur und HR-Strategie bei EterniTeam.</div>
-              <a href="https://linkedin.com/in/sevkan-saylik" target="_blank" class="tc-linkedin" style="width:100%;justify-content:center;font-size:11px">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="#1D4ED8"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-                LinkedIn
-              </a>
-            </div>
+        </div>
+        <div style="padding:13px 16px 11px;display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <div style="font-size:13.5px;font-weight:800;color:var(--navy);letter-spacing:-.35px;margin-bottom:2px">Sevkan Saylik</div>
+            <div style="font-size:10.5px;color:var(--sage);font-weight:600">Director HR</div>
+          </div>
+          <svg class="tc-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0;color:var(--gray2)"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="tc-exp">
+          <div style="padding:0 16px 14px">
+            <div style="width:100%;height:1px;background:var(--border);margin-bottom:11px"></div>
+            <div style="font-size:11.5px;color:var(--gray2);line-height:1.65;margin-bottom:11px">Verantwortlich für Talent Acquisition, Teamkultur und HR-Strategie bei EterniTeam.</div>
+            <a href="https://linkedin.com/in/sevkan-saylik" target="_blank" class="tc-linkedin" style="width:100%;justify-content:center">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="#1D4ED8"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn Profil
+            </a>
           </div>
         </div>
       </div>
