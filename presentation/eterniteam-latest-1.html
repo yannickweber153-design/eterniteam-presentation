@@ -1060,14 +1060,27 @@ button:focus-visible,.btn-p:focus-visible,.btn-s:focus-visible{outline:2px solid
     <!-- Cinematic 6s loop: 3-layer parallax, breathing gradient, spring-physics light sweep, film grain.
          Rendered via Remotion (src/IntroBg.tsx). WebM ~74KB, MP4 fallback ~737KB. -->
     <video
+      id="s0-bg-video"
       class="s0-bg-video"
-      autoplay muted loop playsinline preload="auto"
-      style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none"
+      autoplay muted loop playsinline preload="auto" disablepictureinpicture
+      style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;opacity:1"
       aria-hidden="true">
       <source src="media/intro-bg.webm" type="video/webm">
       <source src="media/intro-bg.mp4" type="video/mp4">
     </video>
   </div>
+  <script>
+    (function(){
+      var v = document.getElementById('s0-bg-video');
+      if (!v) return;
+      v.muted = true; // required for autoplay on some browsers
+      var tryPlay = function(){ var p = v.play(); if (p && p.catch) p.catch(function(){}); };
+      if (v.readyState >= 2) tryPlay(); else v.addEventListener('loadeddata', tryPlay, {once:true});
+      // Fallback: first user interaction anywhere unblocks playback
+      var unlock = function(){ tryPlay(); ['pointerdown','keydown','touchstart'].forEach(function(e){ document.removeEventListener(e, unlock, true); }); };
+      ['pointerdown','keydown','touchstart'].forEach(function(e){ document.addEventListener(e, unlock, true); });
+    })();
+  </script>
 
   <!-- Base background: cool, clean, defined -->
   <div style="position:absolute;inset:0;background:linear-gradient(148deg,rgba(232,238,246,0.28) 0%,rgba(220,234,232,0.22) 50%,rgba(232,238,246,0.28) 100%);z-index:1"></div>
