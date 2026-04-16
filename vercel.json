@@ -1,5 +1,5 @@
 {
-  "buildCommand": "cp presentation/eterniteam-latest-1.html public/index.html && mkdir -p public/media && cp -R presentation/media/. public/media/ && cp presentation/*.png public/ 2>/dev/null; cp presentation/anteile.mp4 public/ 2>/dev/null; true",
+  "buildCommand": "cp presentation/eterniteam-latest-1.html public/index.html",
   "outputDirectory": "public",
   "rewrites": [
     { "source": "/", "destination": "/index.html" }
