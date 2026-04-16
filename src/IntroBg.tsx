@@ -1,355 +1,273 @@
 import React from "react";
-import { AbsoluteFill, useCurrentFrame, useVideoConfig, random } from "remotion";
+import { AbsoluteFill, useCurrentFrame, useVideoConfig } from "remotion";
 
-// Brand palette
-const NAVY = "#1b3a5c";
-const NAVY_DEEP = "#0f2640";
-const SAGE = "#6b8573";
-const SAGE_DEEP = "#3d5a4a";
-const SAND = "#d6c9a8";
-const BG_WARM = "#f5f2ec";
-const INK = "#0d1410";
+/**
+ * Liquid Mesh — Apple/Stripe-grade flowing gradient hero background.
+ *
+ * Technique:
+ *  1. Huge soft color blobs (sage, gold, sand, navy-tinted) orbit on
+ *     sinusoidal paths — classic mesh gradient foundation.
+ *  2. feTurbulence + feDisplacementMap distorts the whole composite every
+ *     frame → produces genuinely flowing, organic edges (looks like silk /
+ *     liquid light, not like static SVG circles).
+ *  3. A second displacement layer carries caustic-like highlights that
+ *     drift across the surface.
+ *  4. Slow camera push-in adds cinematic motion.
+ *  5. Subtle film grain + vignette.
+ *
+ * 6s seamless loop @ 30fps @ 1920×1080.
+ */
+
+const BG_WARM = "#f2ece0"; // warm cream
+const BG_DEEP = "#e4d9c0"; // deeper sunlit cream
+const SAGE = "#8aa593";
+const SAGE_DEEP = "#5d7a68";
+const GOLD = "#d4a86a";
+const GOLD_HOT = "#ffd89a";
+const NAVY_SOFT = "#5a6b7e";
+const INK = "#1a1610";
 
 const TAU = Math.PI * 2;
-const sin = (t: number, phase = 0) => Math.sin(t * TAU + phase);
-const cos = (t: number, phase = 0) => Math.cos(t * TAU + phase);
-
-// Loop-safe periodic node positions
-const nodePos = (seed: number, t: number, width: number, height: number) => {
-  const baseX = 0.06 + random(`nx${seed}`) * 0.88;
-  const baseY = 0.06 + random(`ny${seed}`) * 0.88;
-  const freq1 = 1 + Math.floor(random(`f1${seed}`) * 2); // 1..2
-  const freq2 = 1 + Math.floor(random(`f2${seed}`) * 2);
-  const amp = 0.018 + random(`a${seed}`) * 0.035; // small, elegant drift
-  const phase1 = random(`p1${seed}`) * TAU;
-  const phase2 = random(`p2${seed}`) * TAU;
-  const dx = Math.sin(t * TAU * freq1 + phase1) * amp;
-  const dy = Math.cos(t * TAU * freq2 + phase2) * amp;
-  return { x: (baseX + dx) * width, y: (baseY + dy) * height };
-};
-
-const NODE_COUNT = 34;
-const CONNECT_DIST = 0.22; // fraction of diagonal
 
 export const IntroBg: React.FC = () => {
   const frame = useCurrentFrame();
   const { durationInFrames, width, height } = useVideoConfig();
   const t = frame / durationInFrames; // 0..1
 
-  const diag = Math.hypot(width, height);
-  const maxDist = diag * CONNECT_DIST;
+  // Camera push-in — very slight, imperceptible but adds weight
+  const camScale = 1.0 + 0.02 * (1 - Math.cos(t * TAU));
+  const tx = (width * (1 - camScale)) / 2;
+  const ty = (height * (1 - camScale)) / 2;
 
-  // Compute node positions
-  const nodes = Array.from({ length: NODE_COUNT }, (_, i) => {
-    const { x, y } = nodePos(i, t, width, height);
-    const size = 1.4 + random(`sz${i}`) * 2.2;
-    // subtle twinkle
-    const tw = 0.55 + 0.45 * sin(t * 2, i * 0.9);
-    return { i, x, y, size, tw };
+  // Blob positions (loop-safe orbital)
+  const blobPos = (cx: number, cy: number, orbR: number, phase: number) => ({
+    x: cx + Math.cos(t * TAU + phase) * orbR,
+    y: cy + Math.sin(t * TAU + phase + Math.PI / 3) * orbR * 0.7,
   });
 
-  // Compute edges: pairs within threshold, dedup
-  type Edge = { a: number; b: number; o: number; dx: number; dy: number; len: number };
-  const edges: Edge[] = [];
-  for (let i = 0; i < nodes.length; i++) {
-    for (let j = i + 1; j < nodes.length; j++) {
-      const dx = nodes[j].x - nodes[i].x;
-      const dy = nodes[j].y - nodes[i].y;
-      const len = Math.hypot(dx, dy);
-      if (len < maxDist) {
-        // opacity falls off quadratically with distance
-        const o = Math.pow(1 - len / maxDist, 1.8) * 0.42;
-        edges.push({ a: i, b: j, o, dx, dy, len });
-      }
-    }
-  }
+  const sage = blobPos(width * 0.72, height * 0.28, width * 0.09, 0);
+  const gold = blobPos(width * 0.85, height * 0.15, width * 0.06, Math.PI / 2);
+  const sand = blobPos(width * 0.55, height * 0.7, width * 0.12, Math.PI);
+  const navy = blobPos(width * 0.18, height * 0.82, width * 0.1, Math.PI * 1.4);
+  const sageDeep = blobPos(width * 0.4, height * 0.3, width * 0.08, Math.PI * 0.7);
 
-  // ---------- Mesh gradient base (3 blurred color blobs) ----------
-  // Each blob orbits gently to create a morphing mesh-gradient feeling.
-  const blob = (
-    cxBase: number,
-    cyBase: number,
-    orbR: number,
-    phase: number,
-    color: string,
-    opacity: number,
-    radius: number,
-    gradId: string
-  ) => {
-    const cx = cxBase + cos(t, phase) * orbR;
-    const cy = cyBase + sin(t, phase + Math.PI / 3) * orbR * 0.75;
-    return (
-      <g key={gradId}>
-        <defs>
-          <radialGradient id={gradId}>
-            <stop offset="0%" stopColor={color} stopOpacity={opacity} />
-            <stop offset="55%" stopColor={color} stopOpacity={opacity * 0.35} />
-            <stop offset="100%" stopColor={color} stopOpacity="0" />
-          </radialGradient>
-        </defs>
-        <circle cx={cx} cy={cy} r={radius} fill={`url(#${gradId})`} />
-      </g>
-    );
-  };
+  // Displacement seed — advances each frame but loops over 6s for seamless cycle
+  const dispSeed = Math.floor((t * 180) % 180);
 
-  // ---------- Scan beam (crisp diagonal) ----------
-  // Travels left-to-right once per loop with ease-in-out. To keep a seamless
-  // loop, we fade the beam in/out near the edges via a sin envelope.
-  const beamProgress = t; // 0..1 linear
-  const beamEase = 0.5 - 0.5 * Math.cos(beamProgress * Math.PI); // ease in/out, 0..1
-  const beamX = -width * 0.3 + beamEase * width * 1.6;
-  const beamEnvelope = Math.sin(t * Math.PI); // 0→1→0 over loop for fade
+  // Caustic sweep: a brighter, distorted band that drifts across the surface
+  const causticOffset = t; // 0..1 across loop
+  const causticEnv = Math.sin(t * Math.PI); // fade in/out for loop continuity
 
-  // ---------- Energy pulses travelling along edges ----------
-  // Pick a deterministic edge subset; animate a pulse along each.
-  const PULSE_COUNT = 4;
-  const pulses = Array.from({ length: PULSE_COUNT }, (_, k) => {
-    if (edges.length === 0) return null;
-    const edgeIdx =
-      Math.floor(random(`pe${k}`) * edges.length + t * edges.length * (k + 1) * 0.3) %
-      edges.length;
-    const edge = edges[edgeIdx];
-    const na = nodes[edge.a];
-    const nb = nodes[edge.b];
-    // Pulse travel: offset per pulse so they don't sync
-    const localT = (t + k / PULSE_COUNT) % 1;
-    // Ease with bias; multiple passes per loop feel livelier
-    const passes = 2;
-    const u = (localT * passes) % 1;
-    // Bell envelope so the pulse brightens mid-edge and fades at ends
-    const env = Math.sin(u * Math.PI);
-    const x = na.x + (nb.x - na.x) * u;
-    const y = na.y + (nb.y - na.y) * u;
-    return { key: k, x, y, env };
-  }).filter(Boolean) as { key: number; x: number; y: number; env: number }[];
-
-  // Film grain seed
-  const grainSeed = Math.floor(t * 90) % 12;
+  // Grain seed
+  const grainSeed = Math.floor(t * 240) % 40;
 
   return (
     <AbsoluteFill style={{ background: BG_WARM, overflow: "hidden" }}>
-      <svg
-        width={width}
-        height={height}
-        viewBox={`0 0 ${width} ${height}`}
-        style={{ position: "absolute", inset: 0 }}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          transform: `translate(${tx}px, ${ty}px) scale(${camScale})`,
+          transformOrigin: "50% 50%",
+        }}
       >
-        <defs>
-          {/* Sharp beam gradient — crisp edges, tight hot center */}
-          <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#ffffff" stopOpacity="0" />
-            <stop offset="44%" stopColor="#ffffff" stopOpacity="0" />
-            <stop offset="49%" stopColor="#ffffff" stopOpacity="0.55" />
-            <stop offset="50%" stopColor="#ffffff" stopOpacity="0.75" />
-            <stop offset="51%" stopColor="#ffffff" stopOpacity="0.55" />
-            <stop offset="56%" stopColor="#ffffff" stopOpacity="0" />
-            <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
-          </linearGradient>
-
-          {/* Node ring (dot with halo) */}
-          <radialGradient id="nodeDot">
-            <stop offset="0%" stopColor={NAVY_DEEP} stopOpacity="1" />
-            <stop offset="45%" stopColor={NAVY} stopOpacity="0.85" />
-            <stop offset="100%" stopColor={NAVY} stopOpacity="0" />
-          </radialGradient>
-
-          {/* Pulse glow */}
-          <radialGradient id="pulseGlow">
-            <stop offset="0%" stopColor={SAGE} stopOpacity="1" />
-            <stop offset="40%" stopColor={SAGE} stopOpacity="0.55" />
-            <stop offset="100%" stopColor={SAGE} stopOpacity="0" />
-          </radialGradient>
-
-          {/* Grain */}
-          <filter id="grain" x="0" y="0" width="100%" height="100%">
-            <feTurbulence
-              type="fractalNoise"
-              baseFrequency="0.85"
-              numOctaves="2"
-              seed={grainSeed}
-              stitchTiles="stitch"
-            />
-            <feColorMatrix
-              type="matrix"
-              values="0 0 0 0 0.07  0 0 0 0 0.09  0 0 0 0 0.08  0 0 0 0.35 0"
-            />
-          </filter>
-
-          {/* Soft glow for pulses */}
-          <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="6" />
-          </filter>
-
-          {/* Mesh gradient blur (heavy blur for color blobs) */}
-          <filter id="meshBlur">
-            <feGaussianBlur stdDeviation="120" />
-          </filter>
-        </defs>
-
-        {/* Mesh gradient layer: blurred color blobs drifting */}
-        <g filter="url(#meshBlur)">
-          {blob(
-            width * 0.78,
-            height * 0.22,
-            width * 0.08,
-            0,
-            SAGE,
-            0.55,
-            Math.max(width, height) * 0.42,
-            "b1"
-          )}
-          {blob(
-            width * 0.18,
-            height * 0.78,
-            width * 0.09,
-            Math.PI,
-            NAVY,
-            0.32,
-            Math.max(width, height) * 0.48,
-            "b2"
-          )}
-          {blob(
-            width * 0.5,
-            height * 0.55,
-            width * 0.12,
-            Math.PI / 2,
-            SAND,
-            0.38,
-            Math.max(width, height) * 0.34,
-            "b3"
-          )}
-          {blob(
-            width * 0.3,
-            height * 0.2,
-            width * 0.07,
-            Math.PI * 1.3,
-            SAGE_DEEP,
-            0.22,
-            Math.max(width, height) * 0.3,
-            "b4"
-          )}
-        </g>
-
-        {/* Subtle grid: horizontal/vertical faint lines for tech feel */}
-        <g stroke={NAVY_DEEP} strokeWidth="1" opacity="0.04">
-          {Array.from({ length: 18 }, (_, i) => (
-            <line
-              key={`vg${i}`}
-              x1={(width / 18) * i}
-              y1="0"
-              x2={(width / 18) * i}
-              y2={height}
-            />
-          ))}
-          {Array.from({ length: 10 }, (_, i) => (
-            <line
-              key={`hg${i}`}
-              x1="0"
-              y1={(height / 10) * i}
-              x2={width}
-              y2={(height / 10) * i}
-            />
-          ))}
-        </g>
-
-        {/* Network edges */}
-        <g>
-          {edges.map((e, idx) => {
-            const na = nodes[e.a];
-            const nb = nodes[e.b];
-            return (
-              <line
-                key={`e${idx}`}
-                x1={na.x}
-                y1={na.y}
-                x2={nb.x}
-                y2={nb.y}
-                stroke={NAVY_DEEP}
-                strokeWidth="1"
-                opacity={e.o}
-                strokeLinecap="round"
-              />
-            );
-          })}
-        </g>
-
-        {/* Nodes */}
-        <g>
-          {nodes.map((n) => (
-            <g key={`n${n.i}`}>
-              {/* Halo */}
-              <circle
-                cx={n.x}
-                cy={n.y}
-                r={n.size * 4}
-                fill="url(#nodeDot)"
-                opacity={0.18 * n.tw}
-              />
-              {/* Core dot */}
-              <circle
-                cx={n.x}
-                cy={n.y}
-                r={n.size}
-                fill={NAVY_DEEP}
-                opacity={0.55 + 0.4 * n.tw}
-              />
-            </g>
-          ))}
-        </g>
-
-        {/* Energy pulses along edges */}
-        <g filter="url(#softGlow)">
-          {pulses.map((p) => (
-            <circle
-              key={`p${p.key}`}
-              cx={p.x}
-              cy={p.y}
-              r={6 + 8 * p.env}
-              fill="url(#pulseGlow)"
-              opacity={p.env}
-            />
-          ))}
-        </g>
-        {/* Pulse cores (sharp) */}
-        <g>
-          {pulses.map((p) => (
-            <circle
-              key={`pc${p.key}`}
-              cx={p.x}
-              cy={p.y}
-              r={2.2 * p.env}
-              fill={SAGE_DEEP}
-              opacity={p.env * 0.95}
-            />
-          ))}
-        </g>
-
-        {/* Crisp diagonal scan beam */}
-        <g
-          transform={`translate(${beamX} 0) rotate(-18 ${width / 2} ${height / 2})`}
-          opacity={beamEnvelope * 0.9}
+        <svg
+          width={width}
+          height={height}
+          viewBox={`0 0 ${width} ${height}`}
+          style={{ position: "absolute", inset: 0 }}
         >
+          <defs>
+            {/* Mesh gradient blob definitions */}
+            <radialGradient id="gSage">
+              <stop offset="0%" stopColor={SAGE} stopOpacity="0.95" />
+              <stop offset="50%" stopColor={SAGE} stopOpacity="0.5" />
+              <stop offset="100%" stopColor={SAGE} stopOpacity="0" />
+            </radialGradient>
+            <radialGradient id="gSageDeep">
+              <stop offset="0%" stopColor={SAGE_DEEP} stopOpacity="0.55" />
+              <stop offset="55%" stopColor={SAGE_DEEP} stopOpacity="0.18" />
+              <stop offset="100%" stopColor={SAGE_DEEP} stopOpacity="0" />
+            </radialGradient>
+            <radialGradient id="gGold">
+              <stop offset="0%" stopColor={GOLD_HOT} stopOpacity="0.85" />
+              <stop offset="40%" stopColor={GOLD} stopOpacity="0.55" />
+              <stop offset="100%" stopColor={GOLD} stopOpacity="0" />
+            </radialGradient>
+            <radialGradient id="gSand">
+              <stop offset="0%" stopColor={BG_DEEP} stopOpacity="0.9" />
+              <stop offset="60%" stopColor={BG_DEEP} stopOpacity="0.35" />
+              <stop offset="100%" stopColor={BG_DEEP} stopOpacity="0" />
+            </radialGradient>
+            <radialGradient id="gNavy">
+              <stop offset="0%" stopColor={NAVY_SOFT} stopOpacity="0.28" />
+              <stop offset="55%" stopColor={NAVY_SOFT} stopOpacity="0.1" />
+              <stop offset="100%" stopColor={NAVY_SOFT} stopOpacity="0" />
+            </radialGradient>
+
+            {/* Caustic light gradient — linear band */}
+            <linearGradient id="caustic" x1="0" y1="0" x2="1" y2="0.3">
+              <stop offset="0%" stopColor={GOLD_HOT} stopOpacity="0" />
+              <stop offset="30%" stopColor={GOLD_HOT} stopOpacity="0" />
+              <stop offset="45%" stopColor={GOLD_HOT} stopOpacity="0.45" />
+              <stop offset="50%" stopColor="#ffffff" stopOpacity="0.62" />
+              <stop offset="55%" stopColor={GOLD_HOT} stopOpacity="0.45" />
+              <stop offset="70%" stopColor={GOLD_HOT} stopOpacity="0" />
+              <stop offset="100%" stopColor={GOLD_HOT} stopOpacity="0" />
+            </linearGradient>
+
+            {/* PREMIUM SAUCE: feTurbulence + feDisplacementMap for flowing edges */}
+            <filter id="liquidDisplace" x="-10%" y="-10%" width="120%" height="120%">
+              <feTurbulence
+                type="fractalNoise"
+                baseFrequency="0.0045 0.008"
+                numOctaves="2"
+                seed={dispSeed}
+                result="noise"
+              />
+              <feDisplacementMap
+                in="SourceGraphic"
+                in2="noise"
+                scale="180"
+                xChannelSelector="R"
+                yChannelSelector="G"
+              />
+              <feGaussianBlur stdDeviation="26" />
+            </filter>
+
+            {/* Secondary displacement for caustic — different frequency */}
+            <filter id="causticDisplace" x="-20%" y="-20%" width="140%" height="140%">
+              <feTurbulence
+                type="turbulence"
+                baseFrequency="0.012 0.02"
+                numOctaves="2"
+                seed={dispSeed * 2}
+                result="noise"
+              />
+              <feDisplacementMap
+                in="SourceGraphic"
+                in2="noise"
+                scale="80"
+                xChannelSelector="R"
+                yChannelSelector="G"
+              />
+              <feGaussianBlur stdDeviation="8" />
+            </filter>
+
+            {/* Fine film grain */}
+            <filter id="grain">
+              <feTurbulence
+                type="fractalNoise"
+                baseFrequency="0.9"
+                numOctaves="2"
+                seed={grainSeed}
+                stitchTiles="stitch"
+              />
+              <feColorMatrix
+                type="matrix"
+                values="0 0 0 0 0.1  0 0 0 0 0.09  0 0 0 0 0.06  0 0 0 0.4 0"
+              />
+            </filter>
+          </defs>
+
+          {/* --- LIQUID MESH LAYER --- */}
+          {/* Applied via filter: turbulence distorts the union of all blobs,
+              producing silk-like flowing edges rather than clean circles. */}
+          <g filter="url(#liquidDisplace)">
+            <circle
+              cx={sand.x}
+              cy={sand.y}
+              r={Math.max(width, height) * 0.55}
+              fill="url(#gSand)"
+            />
+            <circle
+              cx={sage.x}
+              cy={sage.y}
+              r={Math.max(width, height) * 0.45}
+              fill="url(#gSage)"
+            />
+            <circle
+              cx={sageDeep.x}
+              cy={sageDeep.y}
+              r={Math.max(width, height) * 0.3}
+              fill="url(#gSageDeep)"
+            />
+            <circle
+              cx={gold.x}
+              cy={gold.y}
+              r={Math.max(width, height) * 0.35}
+              fill="url(#gGold)"
+            />
+            <circle
+              cx={navy.x}
+              cy={navy.y}
+              r={Math.max(width, height) * 0.4}
+              fill="url(#gNavy)"
+            />
+          </g>
+
+          {/* --- CAUSTIC LIGHT SWEEP --- */}
+          {/* Light band crossing at a slight angle, distorted by turbulence
+              for an iridescent caustic ripple. */}
+          <g
+            opacity={causticEnv * 0.9}
+            transform={`translate(${-width * 0.4 + causticOffset * width * 1.8} 0) rotate(-14 ${width / 2} ${height / 2})`}
+            filter="url(#causticDisplace)"
+          >
+            <rect
+              x={-width * 0.15}
+              y={-height * 0.3}
+              width={width * 0.3}
+              height={height * 1.6}
+              fill="url(#caustic)"
+            />
+          </g>
+
+          {/* --- SECONDARY CAUSTIC (offset half-loop for continuity) --- */}
+          <g
+            opacity={Math.sin(((t + 0.5) % 1) * Math.PI) * 0.55}
+            transform={`translate(${-width * 0.4 + ((t + 0.5) % 1) * width * 1.8} 0) rotate(-14 ${width / 2} ${height / 2})`}
+            filter="url(#causticDisplace)"
+          >
+            <rect
+              x={-width * 0.1}
+              y={-height * 0.3}
+              width={width * 0.2}
+              height={height * 1.6}
+              fill="url(#caustic)"
+            />
+          </g>
+
+          {/* --- DEPTH / VIGNETTE --- */}
+          <defs>
+            <radialGradient id="hotspot" cx="82%" cy="18%" r="48%">
+              <stop offset="0%" stopColor={GOLD_HOT} stopOpacity="0.28" />
+              <stop offset="100%" stopColor={GOLD_HOT} stopOpacity="0" />
+            </radialGradient>
+            <radialGradient id="vig" cx="50%" cy="50%" r="78%">
+              <stop offset="55%" stopColor={INK} stopOpacity="0" />
+              <stop offset="100%" stopColor={INK} stopOpacity="0.18" />
+            </radialGradient>
+            {/* Left-side text protection — very subtle */}
+            <linearGradient id="textProtect" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor={BG_WARM} stopOpacity="0.2" />
+              <stop offset="40%" stopColor={BG_WARM} stopOpacity="0.05" />
+              <stop offset="100%" stopColor={BG_WARM} stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          <rect width={width} height={height} fill="url(#hotspot)" />
+          <rect width={width} height={height} fill="url(#textProtect)" />
+          <rect width={width} height={height} fill="url(#vig)" />
+
+          {/* --- FILM GRAIN --- */}
           <rect
-            x={-width * 0.35}
-            y={-height * 0.3}
-            width={width * 0.7}
-            height={height * 1.6}
-            fill="url(#beam)"
+            width={width}
+            height={height}
+            filter="url(#grain)"
+            opacity="0.55"
           />
-        </g>
-
-        {/* Vignette */}
-        <defs>
-          <radialGradient id="vig" cx="50%" cy="50%" r="75%">
-            <stop offset="55%" stopColor={INK} stopOpacity="0" />
-            <stop offset="100%" stopColor={INK} stopOpacity="0.18" />
-          </radialGradient>
-        </defs>
-        <rect width={width} height={height} fill="url(#vig)" />
-
-        {/* Film grain */}
-        <rect width={width} height={height} filter="url(#grain)" opacity="0.5" />
-      </svg>
+        </svg>
+      </div>
     </AbsoluteFill>
   );
 };
