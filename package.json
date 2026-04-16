@@ -25,7 +25,10 @@
     "dev": "remotion studio",
     "build": "remotion bundle",
     "upgrade": "remotion upgrade",
-    "lint": "eslint src && tsc"
+    "lint": "eslint src && tsc",
+    "render:hero-intro": "remotion render HeroIntro presentation/media/hero-intro.webm --codec=vp9 --crf=36",
+    "render:hero-intro:mp4": "remotion render HeroIntro presentation/media/hero-intro.mp4 --codec=h264 --crf=26",
+    "render:hero-intro:all": "npm run render:hero-intro && npm run render:hero-intro:mp4"
   },
   "sideEffects": [
     "*.css"
